@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 10, 2021 at 02:35 AM
+-- Generation Time: Dec 12, 2021 at 05:37 PM
 -- Server version: 8.0.17
 -- PHP Version: 7.3.10
 
@@ -408,6 +408,42 @@ CREATE TABLE `lab_technician` (
 
 INSERT INTO `lab_technician` (`id_no`) VALUES
 (876009889);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `login`
+--
+
+CREATE TABLE `login` (
+  `staffid` int(11) NOT NULL,
+  `password` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `login`
+--
+
+INSERT INTO `login` (`staffid`, `password`) VALUES
+(895171, 'Kn9Wzc8Cn'),
+(81595444, 'GGcD7eGJQ'),
+(153371888, 'qN7KxVBPZ'),
+(313282358, '4SJ3jyCDc'),
+(514086348, 'Mgt0g5TsG'),
+(550795978, '585OhWTjD'),
+(580268862, 'jXOLqg6td'),
+(584663073, 'Rd9A6v9XJ'),
+(623907731, '8JCRyK4qy'),
+(673831710, '5fpO4LEdp'),
+(764118558, 'Fl5Rce951'),
+(806679732, 'pyc2f1UBE'),
+(851802243, 'KDG3197xw'),
+(876009889, 'jaaKeCtdF'),
+(887888122, 'EE5ZrRWpB'),
+(931436886, '3QzZ2jstT'),
+(956296465, 'ddAKqBkPh'),
+(967487788, 'bJSK4mXGT'),
+(968924598, 'Y4PIwwMyt');
 
 -- --------------------------------------------------------
 
@@ -865,34 +901,38 @@ CREATE TABLE `patient` (
   `m_initial` varchar(45) DEFAULT NULL,
   `lname` varchar(255) NOT NULL,
   `gender` varchar(45) NOT NULL,
-  `dob` date NOT NULL
+  `dob` date NOT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `phone_number` int(11) DEFAULT NULL,
+  `insurance_provider` varchar(45) DEFAULT NULL,
+  `ward_no` int(3) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `patient`
 --
 
-INSERT INTO `patient` (`healthcard_no`, `fname`, `m_initial`, `lname`, `gender`, `dob`) VALUES
-(701940, 'Dugald', 'f', 'Durrett', 'Female', '1985-07-02'),
-(4480857, 'Megen', 'h', 'Nother', 'Male', '2020-12-29'),
-(38865301, 'Arley', 'Q', 'Cattlemull', 'Male', '2012-11-12'),
-(58143759, 'Shanda', 'T', 'Cromett', 'Female', '1961-05-23'),
-(69036544, 'Cletus', 'X', 'Keets', 'Male', '1991-06-24'),
-(73753372, 'Chalmers', 'I', 'Pott', 'Female', '2013-01-10'),
-(159097031, 'Kizzee', 'u', 'Williscroft', 'Male', '2001-11-01'),
-(316180998, 'Shelba', 'Y', 'Gentiry', 'Female', '2014-11-03'),
-(350940381, 'Candi', 'l', 'Reddihough', 'Female', '1968-08-22'),
-(529221882, 'Beret', 'h', 'Ruppertz', 'Male', '2019-09-27'),
-(611859931, 'Rodge', 'e', 'Landrean', 'Male', '2021-06-29'),
-(635178813, 'Bernete', 'P', 'Dellow', 'Male', '2016-01-28'),
-(664925238, 'Jenica', 'H', 'Yoskowitz', 'Male', '1969-03-15'),
-(696306699, 'Emlen', 'K', 'Clout', 'Female', '1979-02-07'),
-(746704007, 'Mahmoud', 'u', 'Kording', 'Female', '1989-12-23'),
-(772308697, 'Hailee', 'b', 'Drance', 'Male', '1963-01-09'),
-(779808608, 'Jerrie', 'Y', 'MacKain', 'Male', '1980-05-05'),
-(865328196, 'Ferd', 's', 'Marcos', 'Male', '1967-06-24'),
-(987089222, 'Bryn', 'e', 'Crookes', 'Male', '2019-10-27'),
-(994072237, 'Les', 'w', 'Matthews', 'Male', '1993-10-25');
+INSERT INTO `patient` (`healthcard_no`, `fname`, `m_initial`, `lname`, `gender`, `dob`, `address`, `phone_number`, `insurance_provider`, `ward_no`) VALUES
+(701940, 'Dugald', 'f', 'Durrett', 'Female', '1985-07-02', '8744 Sherman Lane', 2147483647, 'Kessler-Rohan', 10),
+(4480857, 'Megen', 'h', 'Nother', 'Male', '2020-12-29', '575 Oneill Circle', 2147483647, 'Heaney-Greenfelder', 34),
+(38865301, 'Arley', 'Q', 'Cattlemull', 'Male', '2012-11-12', '5837 Saint Paul Street', 2147483647, 'Satterfield LLC', 16),
+(58143759, 'Shanda', 'T', 'Cromett', 'Female', '1961-05-23', '1829 Calypso Place', 2147483647, 'Hand, Spencer and Kulas', 12),
+(69036544, 'Cletus', 'X', 'Keets', 'Male', '1991-06-24', '752 Nevada Road', 2147483647, 'Dooley, Beatty and Heidenreich', 17),
+(73753372, 'Chalmers', 'I', 'Pott', 'Female', '2013-01-10', '39818 Vera Junction', 1278460255, 'Larkin Inc', 28),
+(159097031, 'Kizzee', 'u', 'Williscroft', 'Male', '2001-11-01', '17 Melody Drive', 2147483647, 'Hilll Group', 3),
+(316180998, 'Shelba', 'Y', 'Gentiry', 'Female', '2014-11-03', '6744 Alpine Terrace', 1433028319, 'O\'Hara-McCullough', 9),
+(350940381, 'Candi', 'l', 'Reddihough', 'Female', '1968-08-22', '8 Old Shore Pass', 2147483647, 'Smith and Sons', 22),
+(529221882, 'Beret', 'h', 'Ruppertz', 'Male', '2019-09-27', '2024 Morningstar Court', 1849919397, 'Oberbrunner Inc', 2),
+(611859931, 'Rodge', 'e', 'Landrean', 'Male', '2021-06-29', '7 Dawn Crossing', 2147483647, 'Jenkins, Metz and Paucek', 15),
+(635178813, 'Bernete', 'P', 'Dellow', 'Male', '2016-01-28', '034 Meadow Ridge Way', 2147483647, 'Dach Inc', 9),
+(664925238, 'Jenica', 'H', 'Yoskowitz', 'Male', '1969-03-15', '461 Summit Park', 2147483647, 'Haag LLC', 28),
+(696306699, 'Emlen', 'K', 'Clout', 'Female', '1979-02-07', '3405 Oak Valley Pass', 2147483647, 'Schoen Inc', 5),
+(746704007, 'Mahmoud', 'u', 'Kording', 'Female', '1989-12-23', '955 Caliangt Place', 2147483647, 'Zulauf-Harber', 25),
+(772308697, 'Hailee', 'b', 'Drance', 'Male', '1963-01-09', '7981 Ilene Pass', 2147483647, 'Stanton Group', 30),
+(779808608, 'Jerrie', 'Y', 'MacKain', 'Male', '1980-05-05', '08387 Muir Point', 1644330476, 'Kuvalis, Batz and Schimmel', 1),
+(865328196, 'Ferd', 's', 'Marcos', 'Male', '1967-06-24', '1703 Bayside Plaza', 1552359912, 'Osinski-Herzog', 29),
+(987089222, 'Bryn', 'e', 'Crookes', 'Male', '2019-10-27', '95 Fisk Hill', 2147483647, 'Beer-Heller', 2),
+(994072237, 'Les', 'w', 'Matthews', 'Male', '1993-10-25', '5 Dryden Junction', 2147483647, 'Davis-Little', 3);
 
 -- --------------------------------------------------------
 
@@ -1097,6 +1137,13 @@ CREATE TABLE `social_worker` (
   `id_no` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Dumping data for table `social_worker`
+--
+
+INSERT INTO `social_worker` (`id_no`) VALUES
+(313282358);
+
 -- --------------------------------------------------------
 
 --
@@ -1112,33 +1159,34 @@ CREATE TABLE `staff` (
   `address` varchar(255) NOT NULL,
   `dob` date NOT NULL,
   `salary` double NOT NULL,
-  `gender` varchar(45) NOT NULL
+  `gender` varchar(45) NOT NULL,
+  `job` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `staff`
 --
 
-INSERT INTO `staff` (`id_no`, `sin`, `fname`, `m_initial`, `lname`, `address`, `dob`, `salary`, `gender`) VALUES
-(895171, 1418692934, 'Tymon', 'D', 'Lapley', '595 Onsgard Place', '1993-01-19', 36263.81, 'Male'),
-(81595444, 2147483647, 'Rosie', 'g', 'Senogles', '1323 Anthes Road', '1978-11-26', 14785.95, 'Male'),
-(153371888, 2147483647, 'Earlie', 'b', 'Bodleigh', '266 Myrtle Trail', '1976-05-03', 13584.71, 'Male'),
-(313282358, 2147483647, 'Othilia', 'o', 'Fleury', '77388 Memorial Place', '1994-07-04', 50198.27, 'Female'),
-(514086348, 2147483647, 'Gustav', 'T', 'Rule', '44662 Ilene Drive', '1963-07-12', 38925.36, 'Female'),
-(550795978, 2147483647, 'Ninnetta', 'f', 'Sporrij', '6 Raven Alley', '1995-01-15', 36096.45, 'Female'),
-(580268862, 356718137, 'Debora', 'u', 'Camin', '1289 Fairfield Plaza', '1999-07-16', 26476.02, 'Male'),
-(584663073, 1418692932, 'Minetta', 'n', 'Pietrowicz', '4009 Hagan Avenue', '1963-03-06', 31153.82, 'Male'),
-(623907731, 2147483647, 'Fremont', 'D', 'MacPharlain', '60 Packers Drive', '1997-05-25', 32385.21, 'Female'),
-(673831710, 2147483647, 'Danna', 'n', 'Moyes', '70 Kim Point', '1981-04-07', 31883.89, 'Male'),
-(764118558, 2147483647, 'Gail', 'M', 'Bothen', '81791 Quincy Lane', '1973-04-03', 36567.93, 'Female'),
-(806679732, 2147483647, 'Celestyn', 'U', 'Pembery', '64055 Westridge Junction', '1976-12-16', 17853.78, 'Male'),
-(851802243, 2121046762, 'Lula', 'J', 'Million', '98387 Granby Circle', '1997-05-20', 22536.42, 'Male'),
-(876009889, 2147483647, 'Bettina', 'K', 'Tudgay', '884 Pankratz Junction', '1960-11-30', 45349.69, 'Male'),
-(887888122, 2147483647, 'Yoshiko', 'O', 'Divina', '93 Charing Cross Center', '1989-12-29', 21998.55, 'Female'),
-(931436886, 2147483647, 'Yance', 'u', 'Kent', '255 Eagan Park', '1975-09-11', 3984.25, 'Female'),
-(956296465, 105553301, 'Lars', 'C', 'Trevna', '31948 Longview Hill', '1996-07-06', 9679.78, 'Male'),
-(967487788, 2147483647, 'Eleonore', 'u', 'Imort', '2 Transport Lane', '1968-10-02', 53537.75, 'Male'),
-(968924598, 2147483647, 'Tanner', 'f', 'Bauld', '6577 Kropf Way', '1992-06-15', 51670.01, 'Female');
+INSERT INTO `staff` (`id_no`, `sin`, `fname`, `m_initial`, `lname`, `address`, `dob`, `salary`, `gender`, `job`) VALUES
+(895171, 6616217846, 'Tymon', 'D', 'Lapley', '595 Onsgard Place', '1993-01-19', 36263.81, 'Male', 'nurse'),
+(81595444, 7633862631, 'Rosie', 'g', 'Senogles', '1323 Anthes Road', '1978-11-26', 14785.95, 'Male', 'nurse'),
+(153371888, 6132487628, 'Earlie', 'b', 'Bodleigh', '266 Myrtle Trail', '1976-05-03', 13584.71, 'Male', 'nurse'),
+(313282358, 3166875367, 'Othilia', 'o', 'Fleury', '77388 Memorial Place', '1994-07-04', 50198.27, 'Female', 'social worker'),
+(514086348, 8748637713, 'Gustav', 'T', 'Rule', '44662 Ilene Drive', '1963-07-12', 38925.36, 'Female', 'reception'),
+(550795978, 3593872076, 'Ninnetta', 'f', 'Sporrij', '6 Raven Alley', '1995-01-15', 36096.45, 'Female', 'nurse'),
+(580268862, 356718137, 'Debora', 'u', 'Camin', '1289 Fairfield Plaza', '1999-07-16', 26476.02, 'Male', 'nurse'),
+(584663073, 1418692932, 'Minetta', 'n', 'Pietrowicz', '4009 Hagan Avenue', '1963-03-06', 31153.82, 'Male', 'doctor'),
+(623907731, 7999940624, 'Fremont', 'D', 'MacPharlain', '60 Packers Drive', '1997-05-25', 32385.21, 'Female', 'it'),
+(673831710, 9635473314, 'Danna', 'n', 'Moyes', '70 Kim Point', '1981-04-07', 31883.89, 'Male', 'nurse'),
+(764118558, 6706044813, 'Gail', 'M', 'Bothen', '81791 Quincy Lane', '1973-04-03', 36567.93, 'Female', 'doctor'),
+(806679732, 2822222201, 'Celestyn', 'U', 'Pembery', '64055 Westridge Junction', '1976-12-16', 17853.78, 'Male', 'reception'),
+(851802243, 2121046762, 'Lula', 'J', 'Million', '98387 Granby Circle', '1997-05-20', 22536.42, 'Male', 'pharmacist'),
+(876009889, 7226735154, 'Bettina', 'K', 'Tudgay', '884 Pankratz Junction', '1960-11-30', 45349.69, 'Male', 'lab technician'),
+(887888122, 3536884869, 'Yoshiko', 'O', 'Divina', '93 Charing Cross Center', '1989-12-29', 21998.55, 'Female', 'human resource'),
+(931436886, 6497298983, 'Yance', 'u', 'Kent', '255 Eagan Park', '1975-09-11', 3984.25, 'Female', 'doctor'),
+(956296465, 105553301, 'Lars', 'C', 'Trevna', '31948 Longview Hill', '1996-07-06', 9679.78, 'Male', 'nurse'),
+(967487788, 7482989020, 'Eleonore', 'u', 'Imort', '2 Transport Lane', '1968-10-02', 53537.75, 'Male', 'nurse'),
+(968924598, 9892185200, 'Tanner', 'f', 'Bauld', '6577 Kropf Way', '1992-06-15', 51670.01, 'Female', 'doctor');
 
 -- --------------------------------------------------------
 
@@ -1520,6 +1568,12 @@ ALTER TABLE `lab_technician`
   ADD PRIMARY KEY (`id_no`);
 
 --
+-- Indexes for table `login`
+--
+ALTER TABLE `login`
+  ADD PRIMARY KEY (`staffid`);
+
+--
 -- Indexes for table `maintain`
 --
 ALTER TABLE `maintain`
@@ -1567,7 +1621,8 @@ ALTER TABLE `nurse`
 -- Indexes for table `patient`
 --
 ALTER TABLE `patient`
-  ADD PRIMARY KEY (`healthcard_no`);
+  ADD PRIMARY KEY (`healthcard_no`),
+  ADD KEY `ward_no_idx` (`ward_no`);
 
 --
 -- Indexes for table `pharmacist`
@@ -1591,7 +1646,7 @@ ALTER TABLE `reception`
 -- Indexes for table `social_worker`
 --
 ALTER TABLE `social_worker`
-  ADD PRIMARY KEY (`id_no`);
+  ADD KEY `nm_id2_idx` (`id_no`);
 
 --
 -- Indexes for table `staff`
@@ -1686,6 +1741,12 @@ ALTER TABLE `lab_technician`
   ADD CONSTRAINT `m_id4` FOREIGN KEY (`id_no`) REFERENCES `medical` (`id_no`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Constraints for table `login`
+--
+ALTER TABLE `login`
+  ADD CONSTRAINT `sid7` FOREIGN KEY (`staffid`) REFERENCES `staff` (`id_no`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `maintain`
 --
 ALTER TABLE `maintain`
@@ -1717,6 +1778,12 @@ ALTER TABLE `nurse`
   ADD CONSTRAINT `m_id2` FOREIGN KEY (`id_no`) REFERENCES `medical` (`id_no`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Constraints for table `patient`
+--
+ALTER TABLE `patient`
+  ADD CONSTRAINT `ward_no` FOREIGN KEY (`ward_no`) REFERENCES `medical_ward` (`ward_no`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `pharmacist`
 --
 ALTER TABLE `pharmacist`
@@ -1738,7 +1805,7 @@ ALTER TABLE `reception`
 -- Constraints for table `social_worker`
 --
 ALTER TABLE `social_worker`
-  ADD CONSTRAINT `nm_id2` FOREIGN KEY (`id_no`) REFERENCES `non_medical` (`id_no`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `nm_id2` FOREIGN KEY (`id_no`) REFERENCES `medical` (`id_no`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `surgery`
