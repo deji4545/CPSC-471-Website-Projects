@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 12, 2021 at 05:37 PM
+-- Generation Time: Dec 15, 2021 at 05:12 AM
 -- Server version: 8.0.17
 -- PHP Version: 7.3.10
 
@@ -201,35 +201,155 @@ INSERT INTO `dependents` (`id_no`, `fname`, `m_initial`, `lname`, `relationship`
 CREATE TABLE `diagnosed_with` (
   `name` varchar(255) NOT NULL,
   `healthcard_no` int(11) NOT NULL,
-  `date_diagnosed` date NOT NULL
+  `date_diagnosed` date NOT NULL,
+  `treat_no` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `diagnosed_with`
 --
 
-INSERT INTO `diagnosed_with` (`name`, `healthcard_no`, `date_diagnosed`) VALUES
-('Aseptic meningitis', 865328196, '2013-11-27'),
-('Bacterial meningitis', 987089222, '2017-04-15'),
-('Cardiomyopathy', 69036544, '2018-05-21'),
-('Chlamydophila pneumoniae infection', 529221882, '2019-11-01'),
-('Diphtheria', 350940381, '2012-08-10'),
-('Gastroenteritis', 611859931, '2020-06-28'),
-('Huntington\'s disease', 316180998, '2011-01-25'),
-('Idiopathic pulmonary fibrosis', 772308697, '2018-04-27'),
-('Ignious Syndrome', 73753372, '2012-12-09'),
-('Leptospirosis', 38865301, '2011-02-24'),
-('Marburg hemorrhagic fever', 701940, '2012-09-30'),
-('Paracoccidioidomycosis', 58143759, '2017-07-21'),
-('Pneumocystis pneumonia', 159097031, '2013-08-24'),
-('Pyoderma gangrenosum', 4480857, '2016-10-18'),
-('Rickettsial infection', 696306699, '2012-11-30'),
-('Rubella', 779808608, '2016-12-27'),
-('SARS', 994072237, '2021-02-12'),
-('Scarlet fever', 746704007, '2014-02-14'),
-('Shigellosis', 635178813, '2020-09-28'),
-('Subacute bacterial endocarditis', 664925238, '2020-06-07'),
-('Varicose veins', 779808608, '2015-10-14');
+INSERT INTO `diagnosed_with` (`name`, `healthcard_no`, `date_diagnosed`, `treat_no`) VALUES
+('Postpericardiotomy syndrome', 772308697, '2020-10-19', 11328),
+('Common cold', 611859931, '2018-01-01', 12096),
+('Ulcers', 611859931, '2020-10-19', 15593),
+('Progesterone dermatitis', 316180998, '2014-12-21', 15604),
+('Repetitive strain injury', 350940381, '2018-09-13', 17569),
+('Venezuelan equine encephalitis', 73753372, '2014-12-21', 24041),
+('Churg-Strauss syndrome', 611859931, '2019-11-04', 24517),
+('Progesterone dermatitis', 159097031, '2021-10-07', 26962),
+('Repetitive strain injury', 635178813, '2014-04-23', 33560),
+('Common cold', 746704007, '2014-04-23', 51538),
+('Psoriatic arthritis', 696306699, '2015-01-08', 52990),
+('Psoriatic arthritis', 4480857, '2020-11-12', 53459),
+('Peritonitis', 779808608, '2011-12-27', 54219),
+('Hepatitis A', 664925238, '2018-01-01', 54418),
+('Microscopic polyangiitis', 73753372, '2015-01-08', 61137),
+('Common cold', 529221882, '2020-11-12', 61335),
+('Hepatitis A', 159097031, '2019-11-04', 65472),
+('Progesterone dermatitis', 701940, '2020-11-12', 66589),
+('Ulcers', 701940, '2014-04-23', 69056),
+('Postpericardiotomy syndrome', 38865301, '2018-09-13', 69438),
+('Repetitive strain injury', 696306699, '2011-05-30', 71847),
+('Postpericardiotomy syndrome', 58143759, '2014-04-23', 72250),
+('Goodpasture\'s syndrome', 38865301, '2011-05-30', 75624),
+('Ulcers', 779808608, '2011-05-30', 77777),
+('Common cold', 73753372, '2020-08-25', 79968),
+('Zygomycosis', 58143759, '2020-08-25', 80113),
+('Dengue fever', 4480857, '2021-10-07', 81226),
+('Peritonitis', 58143759, '2019-11-04', 81441),
+('Periodontal disease', 701940, '2018-09-13', 82518),
+('Psoriatic arthritis', 635178813, '2014-12-21', 83160),
+('Ulcers', 635178813, '2021-10-07', 83929),
+('Crohn\'s disease', 350940381, '2011-12-27', 86753),
+('Peritonitis', 4480857, '2018-01-01', 89978),
+('Microscopic polyangiitis', 865328196, '2020-11-12', 92955),
+('Hepatitis A', 350940381, '2020-08-25', 92982),
+('Chronic fatigue syndrome', 696306699, '2020-10-19', 93968),
+('Common cold', 865328196, '2011-12-27', 94895),
+('Psoriatic arthritis', 865328196, '2019-11-04', 95978),
+('Bacterial vaginosis', 159097031, '2015-01-08', 96351),
+('Microscopic polyangiitis', 38865301, '2021-10-07', 96748),
+('Psoriatic arthritis', 350940381, '2012-08-28', 127435),
+('Microscopic polyangiitis', 865328196, '2019-09-18', 135234),
+('Aseptic meningitis', 865328196, '2013-11-22', 147891),
+('Bacterial meningitis', 4480857, '2021-01-10', 150789),
+('Postpericardiotomy syndrome', 4480857, '2012-12-02', 171118),
+('Scrapie', 696306699, '2014-12-21', 172698),
+('Ulcers', 38865301, '2011-05-19', 174856),
+('Scrapie', 696306699, '2013-10-17', 177684),
+('Varicose veins', 779808608, '2015-10-14', 190924),
+('Venezuelan equine encephalitis', 73753372, '2016-11-17', 195492),
+('Psoriatic arthritis', 159097031, '2020-11-23', 200794),
+('Hepatitis A', 779808608, '2013-10-16', 207300),
+('Diphtheria', 350940381, '2012-08-10', 218171),
+('Pneumocystis pneumonia', 159097031, '2015-07-29', 221363),
+('Cardiomyopathy', 701940, '2016-04-30', 222551),
+('Dengue fever', 4480857, '2013-08-04', 222561),
+('Ulcers', 73753372, '2021-03-14', 235097),
+('Gastroenteritis', 611859931, '2020-06-28', 244238),
+('Lymphoma', 529221882, '2020-11-12', 250007),
+('Diphyllobothriasis', 701940, '2011-09-05', 270442),
+('Aneurdu', 73753372, '2011-12-27', 291035),
+('Reflex sympathetic dystrophy', 159097031, '2020-08-25', 327513),
+('Chronic fatigue syndrome', 696306699, '2021-03-04', 343194),
+('Human bocavirus infection', 58143759, '2015-05-24', 344564),
+('Subacute bacterial endocarditis', 69036544, '2011-01-07', 359626),
+('Peritonitis', 350940381, '2021-05-17', 364765),
+('Hepatitis A', 746704007, '2012-12-27', 369534),
+('Huntington\'s disease', 746704007, '2012-09-25', 377370),
+('Shigellosis', 635178813, '2021-03-09', 383867),
+('Gonorrhea', 38865301, '2020-12-08', 384734),
+('Peritonitis', 696306699, '2017-09-15', 409133),
+('Progesterone dermatitis', 994072237, '2012-10-09', 431364),
+('Paracoccidioidomycosis', 58143759, '2010-12-11', 441554),
+('Repetitive strain injury', 635178813, '2018-01-05', 453768),
+('Rubella', 779808608, '2016-12-27', 470192),
+('Ignious Syndrome', 73753372, '2012-10-04', 473713),
+('Warts', 4480857, '2021-12-03', 497421),
+('Microscopic polyangiitis', 58143759, '2021-09-29', 519305),
+('Marburg hemorrhagic fever', 701940, '2012-09-30', 520867),
+('Rickettsial infection', 611859931, '2014-01-08', 526506),
+('Pneumocystis pneumonia', 159097031, '2013-08-24', 527347),
+('SARS', 994072237, '2021-02-12', 538966),
+('Chlamydophila pneumoniae infection', 529221882, '2019-11-01', 539748),
+('Churg-Strauss syndrome', 611859931, '2017-06-21', 543274),
+('Shigellosis', 635178813, '2020-09-28', 546513),
+('Microscopic polyangiitis', 779808608, '2016-10-12', 578639),
+('Lymphoma', 635178813, '2021-03-27', 580183),
+('Repetitive strain injury', 159097031, '2021-01-15', 603618),
+('Aseptic meningitis', 865328196, '2013-11-27', 611042),
+('Common cold', 772308697, '2014-12-27', 620421),
+('Bacterial vaginosis', 159097031, '2017-10-02', 623951),
+('Progesterone dermatitis', 611859931, '2018-11-26', 624380),
+('Leptospirosis', 38865301, '2011-02-24', 636521),
+('Gonorrhea', 38865301, '2015-01-08', 647352),
+('Warts', 987089222, '2019-11-04', 657145),
+('Repetitive strain injury', 316180998, '2015-12-25', 658838),
+('Periodontal disease', 701940, '2020-06-04', 661417),
+('Subacute bacterial endocarditis', 664925238, '2020-06-07', 663858),
+('Crohn\'s disease', 350940381, '2013-02-15', 681012),
+('Peritonitis', 635178813, '2018-04-12', 681132),
+('Bacteroides infection', 994072237, '2018-01-01', 685247),
+('Reflex sympathetic dystrophy', 159097031, '2018-11-14', 698256),
+('Goodpasture\'s syndrome', 38865301, '2014-07-09', 700176),
+('Bacterial meningitis', 987089222, '2017-04-15', 706790),
+('Aneurdu', 73753372, '2018-04-29', 709815),
+('Postpericardiotomy syndrome', 696306699, '2020-10-08', 729075),
+('Cardiomyopathy', 69036544, '2018-05-21', 741271),
+('Bacteroides infection', 865328196, '2019-07-26', 754425),
+('SARS', 865328196, '2014-03-22', 755898),
+('Idiopathic pulmonary fibrosis', 772308697, '2018-04-27', 757059),
+('Foodborne illness', 350940381, '2011-05-30', 761942),
+('Rickettsial infection', 746704007, '2014-04-23', 772785),
+('Diphyllobothriasis', 69036544, '2021-10-07', 787978),
+('Common cold', 58143759, '2020-07-24', 800618),
+('Rickettsial infection', 696306699, '2016-04-22', 814058),
+('Foodborne illness', 350940381, '2013-11-05', 843380),
+('Leptospirosis', 38865301, '2013-05-14', 859263),
+('Ignious Syndrome', 73753372, '2012-12-09', 864865),
+('Gastroenteritis', 611859931, '2013-04-17', 866291),
+('Diphtheria', 350940381, '2020-08-09', 869031),
+('Scarlet fever', 746704007, '2014-02-14', 875576),
+('Postpericardiotomy syndrome', 529221882, '2011-06-25', 876775),
+('Idiopathic pulmonary fibrosis', 987089222, '2015-02-01', 884279),
+('Paracoccidioidomycosis', 58143759, '2017-07-21', 885099),
+('Human bocavirus infection', 58143759, '2018-09-13', 886264),
+('Zygomycosis', 58143759, '2013-09-23', 895578),
+('Pyoderma gangrenosum', 4480857, '2016-10-18', 905382),
+('Marburg hemorrhagic fever', 701940, '2018-08-01', 914638),
+('Pyoderma gangrenosum', 4480857, '2015-05-29', 921506),
+('Rubella', 994072237, '2020-10-19', 925800),
+('Progesterone dermatitis', 73753372, '2018-08-27', 929198),
+('Huntington\'s disease', 316180998, '2011-01-25', 930838),
+('Scarlet fever', 611859931, '2018-09-19', 934707),
+('Common cold', 38865301, '2021-04-04', 951080),
+('Chlamydophila pneumoniae infection', 635178813, '2013-07-01', 958327),
+('Hepatitis A', 701940, '2012-01-22', 960057),
+('Ulcers', 865328196, '2012-02-16', 960553),
+('Rickettsial infection', 696306699, '2012-11-30', 983120),
+('Varicose veins', 529221882, '2021-03-27', 987349),
+('Psoriatic arthritis', 664925238, '2021-06-06', 989899);
 
 -- --------------------------------------------------------
 
@@ -954,164 +1074,6 @@ INSERT INTO `pharmacist` (`id_no`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `receives`
---
-
-CREATE TABLE `receives` (
-  `t_no` int(11) NOT NULL,
-  `date` date DEFAULT NULL,
-  `illness_name` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Dumping data for table `receives`
---
-
-INSERT INTO `receives` (`t_no`, `date`, `illness_name`) VALUES
-(11328, '2020-10-19', 'Postpericardiotomy syndrome'),
-(12096, '2018-01-01', 'Common cold'),
-(15593, '2020-10-19', 'Ulcers'),
-(15604, '2014-12-21', 'Progesterone dermatitis'),
-(17569, '2018-09-13', 'Repetitive strain injury'),
-(24041, '2014-12-21', 'Venezuelan equine encephalitis'),
-(24517, '2019-11-04', 'Churg-Strauss syndrome'),
-(26962, '2021-10-07', 'Progesterone dermatitis'),
-(33560, '2014-04-23', 'Repetitive strain injury'),
-(51538, '2014-04-23', 'Common cold'),
-(52990, '2015-01-08', 'Psoriatic arthritis'),
-(53459, '2020-11-12', 'Psoriatic arthritis'),
-(54219, '2011-12-27', 'Peritonitis'),
-(54418, '2018-01-01', 'Hepatitis A'),
-(61137, '2015-01-08', 'Microscopic polyangiitis'),
-(61335, '2020-11-12', 'Common cold'),
-(65472, '2019-11-04', 'Hepatitis A'),
-(66589, '2020-11-12', 'Progesterone dermatitis'),
-(69056, '2014-04-23', 'Ulcers'),
-(69438, '2018-09-13', 'Postpericardiotomy syndrome'),
-(71847, '2011-05-30', 'Repetitive strain injury'),
-(72250, '2014-04-23', 'Postpericardiotomy syndrome'),
-(75624, '2011-05-30', 'Goodpasture\'s syndrome'),
-(77777, '2011-05-30', 'Ulcers'),
-(79968, '2020-08-25', 'Common cold'),
-(80113, '2020-08-25', 'Zygomycosis'),
-(81226, '2021-10-07', 'Dengue fever'),
-(81441, '2019-11-04', 'Peritonitis'),
-(82518, '2018-09-13', 'Periodontal disease'),
-(83160, '2014-12-21', 'Psoriatic arthritis'),
-(83929, '2021-10-07', 'Ulcers'),
-(86753, '2011-12-27', 'Crohn\'s disease'),
-(89978, '2018-01-01', 'Peritonitis'),
-(92955, '2020-11-12', 'Microscopic polyangiitis'),
-(92982, '2020-08-25', 'Hepatitis A'),
-(93968, '2020-10-19', 'Chronic fatigue syndrome'),
-(94895, '2011-12-27', 'Common cold'),
-(95978, '2019-11-04', 'Psoriatic arthritis'),
-(96351, '2015-01-08', 'Bacterial vaginosis'),
-(96748, '2021-10-07', 'Microscopic polyangiitis'),
-(127435, '2012-08-28', 'Psoriatic arthritis'),
-(135234, '2019-09-18', 'Microscopic polyangiitis'),
-(147891, '2013-11-22', 'Aseptic meningitis'),
-(150789, '2021-01-10', 'Bacterial meningitis'),
-(171118, '2012-12-02', 'Postpericardiotomy syndrome'),
-(172698, '2014-12-21', 'Scrapie'),
-(174856, '2011-05-19', 'Ulcers'),
-(177684, '2013-10-17', 'Scrapie'),
-(190924, '2015-10-14', 'Varicose veins'),
-(195492, '2016-11-17', 'Venezuelan equine encephalitis'),
-(200794, '2020-11-23', 'Psoriatic arthritis'),
-(207300, '2013-10-16', 'Hepatitis A'),
-(218171, '2012-08-10', 'Diphtheria'),
-(221363, '2015-07-29', 'Pneumocystis pneumonia'),
-(222551, '2016-04-30', 'Cardiomyopathy'),
-(222561, '2013-08-04', 'Dengue fever'),
-(235097, '2021-03-14', 'Ulcers'),
-(244238, '2020-06-28', 'Gastroenteritis'),
-(250007, '2020-11-12', 'Lymphoma'),
-(270442, '2011-09-05', 'Diphyllobothriasis'),
-(291035, '2011-12-27', 'Aneurdu'),
-(327513, '2020-08-25', 'Reflex sympathetic dystrophy'),
-(343194, '2021-03-04', 'Chronic fatigue syndrome'),
-(344564, '2015-05-24', 'Human bocavirus infection'),
-(359626, '2011-01-07', 'Subacute bacterial endocarditis'),
-(364765, '2021-05-17', 'Peritonitis'),
-(369534, '2012-12-27', 'Hepatitis A'),
-(377370, '2012-09-25', 'Huntington\'s disease'),
-(383867, '2021-03-09', 'Shigellosis'),
-(384734, '2020-12-08', 'Gonorrhea'),
-(409133, '2017-09-15', 'Peritonitis'),
-(431364, '2012-10-09', 'Progesterone dermatitis'),
-(441554, '2010-12-11', 'Paracoccidioidomycosis'),
-(453768, '2018-01-05', 'Repetitive strain injury'),
-(470192, '2016-12-27', 'Rubella'),
-(473713, '2012-10-04', 'Ignious Syndrome'),
-(497421, '2021-12-03', 'Warts'),
-(519305, '2021-09-29', 'Microscopic polyangiitis'),
-(520867, '2012-09-30', 'Marburg hemorrhagic fever'),
-(526506, '2014-01-08', 'Rickettsial infection'),
-(527347, '2013-08-24', 'Pneumocystis pneumonia'),
-(538966, '2021-02-12', 'SARS'),
-(539748, '2019-11-01', 'Chlamydophila pneumoniae infection'),
-(543274, '2017-06-21', 'Churg-Strauss syndrome'),
-(546513, '2020-09-28', 'Shigellosis'),
-(578639, '2016-10-12', 'Microscopic polyangiitis'),
-(580183, '2021-03-27', 'Lymphoma'),
-(603618, '2021-01-15', 'Repetitive strain injury'),
-(611042, '2013-11-27', 'Aseptic meningitis'),
-(620421, '2014-12-27', 'Common cold'),
-(623951, '2017-10-02', 'Bacterial vaginosis'),
-(624380, '2018-11-26', 'Progesterone dermatitis'),
-(636521, '2011-02-24', 'Leptospirosis'),
-(647352, '2015-01-08', 'Gonorrhea'),
-(657145, '2019-11-04', 'Warts'),
-(658838, '2015-12-25', 'Repetitive strain injury'),
-(661417, '2020-06-04', 'Periodontal disease'),
-(663858, '2020-06-07', 'Subacute bacterial endocarditis'),
-(681012, '2013-02-15', 'Crohn\'s disease'),
-(681132, '2018-04-12', 'Peritonitis'),
-(685247, '2018-01-01', 'Bacteroides infection'),
-(698256, '2018-11-14', 'Reflex sympathetic dystrophy'),
-(700176, '2014-07-09', 'Goodpasture\'s syndrome'),
-(706790, '2017-04-15', 'Bacterial meningitis'),
-(709815, '2018-04-29', 'Aneurdu'),
-(729075, '2020-10-08', 'Postpericardiotomy syndrome'),
-(741271, '2018-05-21', 'Cardiomyopathy'),
-(754425, '2019-07-26', 'Bacteroides infection'),
-(755898, '2014-03-22', 'SARS'),
-(757059, '2018-04-27', 'Idiopathic pulmonary fibrosis'),
-(761942, '2011-05-30', 'Foodborne illness'),
-(772785, '2014-04-23', 'Rickettsial infection'),
-(787978, '2021-10-07', 'Diphyllobothriasis'),
-(800618, '2020-07-24', 'Common cold'),
-(814058, '2016-04-22', 'Rickettsial infection'),
-(843380, '2013-11-05', 'Foodborne illness'),
-(859263, '2013-05-14', 'Leptospirosis'),
-(864865, '2012-12-09', 'Ignious Syndrome'),
-(866291, '2013-04-17', 'Gastroenteritis'),
-(869031, '2020-08-09', 'Diphtheria'),
-(875576, '2014-02-14', 'Scarlet fever'),
-(876775, '2011-06-25', 'Postpericardiotomy syndrome'),
-(884279, '2015-02-01', 'Idiopathic pulmonary fibrosis'),
-(885099, '2017-07-21', 'Paracoccidioidomycosis'),
-(886264, '2018-09-13', 'Human bocavirus infection'),
-(895578, '2013-09-23', 'Zygomycosis'),
-(905382, '2016-10-18', 'Pyoderma gangrenosum'),
-(914638, '2018-08-01', 'Marburg hemorrhagic fever'),
-(921506, '2015-05-29', 'Pyoderma gangrenosum'),
-(925800, '2020-10-19', 'Rubella'),
-(929198, '2018-08-27', 'Progesterone dermatitis'),
-(930838, '2011-01-25', 'Huntington\'s disease'),
-(934707, '2018-09-19', 'Scarlet fever'),
-(951080, '2021-04-04', 'Common cold'),
-(958327, '2013-07-01', 'Chlamydophila pneumoniae infection'),
-(960057, '2012-01-22', 'Hepatitis A'),
-(960553, '2012-02-16', 'Ulcers'),
-(983120, '2012-11-30', 'Rickettsial infection'),
-(987349, '2021-03-27', 'Varicose veins'),
-(989899, '2021-06-06', 'Psoriatic arthritis');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `reception`
 --
 
@@ -1528,8 +1490,9 @@ ALTER TABLE `dependents`
 -- Indexes for table `diagnosed_with`
 --
 ALTER TABLE `diagnosed_with`
-  ADD PRIMARY KEY (`name`,`healthcard_no`),
-  ADD KEY `h_no2_idx` (`healthcard_no`);
+  ADD PRIMARY KEY (`treat_no`),
+  ADD KEY `h_no2_idx` (`healthcard_no`),
+  ADD KEY `t_no_idx` (`treat_no`);
 
 --
 -- Indexes for table `doctor`
@@ -1631,12 +1594,6 @@ ALTER TABLE `pharmacist`
   ADD PRIMARY KEY (`id_no`);
 
 --
--- Indexes for table `receives`
---
-ALTER TABLE `receives`
-  ADD PRIMARY KEY (`t_no`,`illness_name`);
-
---
 -- Indexes for table `reception`
 --
 ALTER TABLE `reception`
@@ -1708,7 +1665,8 @@ ALTER TABLE `dependents`
 -- Constraints for table `diagnosed_with`
 --
 ALTER TABLE `diagnosed_with`
-  ADD CONSTRAINT `h_no2` FOREIGN KEY (`healthcard_no`) REFERENCES `patient` (`healthcard_no`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `h_no2` FOREIGN KEY (`healthcard_no`) REFERENCES `patient` (`healthcard_no`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `t_no` FOREIGN KEY (`treat_no`) REFERENCES `treatment` (`treatment_no`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `doctor`
@@ -1788,12 +1746,6 @@ ALTER TABLE `patient`
 --
 ALTER TABLE `pharmacist`
   ADD CONSTRAINT `m_id1` FOREIGN KEY (`id_no`) REFERENCES `medical` (`id_no`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `receives`
---
-ALTER TABLE `receives`
-  ADD CONSTRAINT `t_no2` FOREIGN KEY (`t_no`) REFERENCES `treatment` (`treatment_no`);
 
 --
 -- Constraints for table `reception`
