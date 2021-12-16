@@ -4,7 +4,7 @@ var connection = mysql.createConnection({
     host: 'localhost',
     database: 'healthcare_database',
     user: 'root',
-    password: '',
+    password: 'password',
     multipleStatements: true
 });
 

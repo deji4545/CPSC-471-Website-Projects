@@ -3,9 +3,10 @@
 const Joi = require('joi');
 const express = require('express');
 const app = express();
-
+var cors = require('cors');
 var connection = require('./hospital_db');
 
+app.use(cors());
 app.use(express.json());
 
 function toConnect(sql, res) {
