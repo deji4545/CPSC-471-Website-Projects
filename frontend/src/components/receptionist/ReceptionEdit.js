@@ -1,11 +1,69 @@
-import React from 'react'
+import {useState} from 'react'
 import Button from '../Button'
 import { useParams, Link } from 'react-router-dom'
 
 const ReceptionEdit = () => {
+    const onSubmit=() =>{
+        if(healthCard===''||fname===''||lname===''||mInit===''||gender===''||dob===''||phone===''||efname===''||elname===''||
+        emInit===''||relation===''||ephone===''||address===''||wardNo===''||provider===''||message===''){
+            setMessage('No input can be empty')
+        }
+    }
+    const [healthCard, setCard] = useState('')
+    const [fname, setFname] = useState('') 
+    const [lname, setLname] = useState('') 
+    const [mInit, setMinit] = useState('') 
+    const [gender, setGender] = useState('') 
+    const [dob, setDOB] = useState('') 
+    const [phone, setPhone] = useState('')
+    // emergency contact 
+    const [efname, seteFname] = useState('') 
+    const [elname, seteLname] = useState('') 
+    const [emInit, seteMinit] = useState('') 
+    const [relation, setRelation] = useState('') 
+    const [ephone, setePhone] = useState('')
+
+    const [address, setAddress]= useState('')
+    const [wardNo, setWard] = useState('')
+    const [provider, setProvider] = useState('')
+    const [message, setMessage] = useState('')
+
     const { id } = useParams()
-    console.log("Helo"+id)
+    // console.log("Helo"+id)
     const backButton = <div style={{ fontSize: "12.5px", display: "inline" }}>Cancel</div>
+
+    const onHandleTelephoneChange = e => {
+        let telephone = e.target.value;
+        const number= /^[0-9\b]+$/;
+
+        if (number.test(telephone)|| telephone==='' ) {
+            if (e.target.name==='eNumber'){
+                setePhone(telephone)
+            }else{
+                setPhone(telephone)
+            }
+            
+        }
+        
+    };
+
+    const handleWard= e => {
+        let ward = e.target.value;
+        const number= /^[0-9\b]+$/;
+        if (number.test(ward)|| ward==='' ) {
+            if (ward < 37 ){
+                setWard(ward)
+            }
+            
+        }
+    }
+
+    const addPatients = ()=>{
+
+    }
+
+    
+
     return (
         <div>
             <div className="main-content" >
@@ -15,26 +73,73 @@ const ReceptionEdit = () => {
                     <table >
                         <tbody>
                             <tr>
-                                <td><b>Health card #:</b><br /> <input type="text" style={{ width: "90%", height: "30px" }} placeholder="Healthcard #..." /></td>
-                                <td><b>Firstname:</b><br /> <input type="text" style={{ width: "90%", height: "30px" }} placeholder="Firstname..." /></td>
-                                <td><b>Lastname:</b><br /> <input type="text" style={{ width: "90%", height: "30px" }} placeholder="Lastname..." /></td>
-                                <td><b>M. Initial:</b><br /> <input type="text" style={{ width: "90%", height: "30px" }} placeholder="M.Initial..." /></td>
+                                <td><b>Health card #:</b>
+                                    <br /> <input type="text"  style={{ width: "90%", height: "30px" }} placeholder="Healthcard #..." value={healthCard} onChange={(e) => setCard(e.target.value)}/>
+                                </td>
+                                <td><b>Firstname:</b><br /> 
+                                    <input type="text" style={{ width: "90%", height: "30px" }} placeholder="Firstname..." value={fname} onChange={(e) => setFname(e.target.value)} />
+                                </td>
+                                <td><b>Lastname:</b><br /> 
+                                    <input type="text" style={{ width: "90%", height: "30px" }} placeholder="Lastname..." value={lname} onChange={(e) => setLname(e.target.value)} />
+                                </td>
+                                <td><b>M. Initial:</b><br />
+                                    <input type="text" style={{ width: "90%", height: "30px" }} placeholder="M.Initial..." value={mInit} onChange={(e) => setMinit(e.target.value)} />
+                                </td>
                             </tr>
                             <tr>
-                                <td><b>Gender:</b><br /> <input type="text" style={{ width: "90%", height: "30px" }} placeholder="Gender..." /></td>
-                                <td><b>DOB:</b><br /> <input type="text" style={{ width: "90%", height: "30px" }} placeholder="DOB..." /></td>
-                                <td><b>Telephone #:</b><br /> <input type="text" style={{ width: "90%", height: "30px" }} placeholder="Telephone #..." /></td>
-                                <td><b>Emergency Contact:</b><br /> <input type="text" style={{ width: "90%", height: "30px" }} placeholder="Emergency contact..." /></td>
+                                <td><b>Gender:</b><br /> 
+                                    <input type="text" style={{ width: "90%", height: "30px" }} placeholder="Gender..." value={gender}  onChange={(e) => setGender(e.target.value)}/>
+                                </td>
+                                <td><b>DOB:</b><br /> 
+                                    <input type="date" style={{ width: "90%", height: "30px" }} placeholder="DOB..." value={dob}  onChange={(e) => setDOB(e.target.value)} />
+                                </td>
+                                <td><b>Telephone #:</b><br /> 
+                                    <input type="text" style={{ width: "90%", height: "30px" }} 
+                                        placeholder="Telephone #..."
+                                        value={phone} 
+                                        onChange={onHandleTelephoneChange} />
+                                </td>
+                                
+                            </tr>
+                            <tr><td colSpan="4"><h2> Emergency contact:</h2><br/></td></tr>
+                            <tr>
+                                
+                                <td><b> First name:</b><br /> 
+                                    <input type="text" style={{ width: "90%", height: "30px" }} placeholder="Emergency contact..." value={efname} onChange={(e) => seteFname(e.target.value)} />
+                                </td>
+
+                                <td><b>Last name:</b><br /> 
+                                    <input type="text" style={{ width: "90%", height: "30px" }} placeholder="Emergency contact..." value={elname} onChange={(e) => seteLname(e.target.value)}/>
+                                </td>
+                            
+                                <td ><b>Minit:</b><br /> 
+                                    <input type="text" style={{ width: "90%", height: "30px" }} placeholder="Emergency contact..." value={emInit} onChange={(e) => seteMinit(e.target.value)}  />
+                                </td>
+
+                                <td ><b>Relation:</b><br /> 
+                                    <input type="text" style={{ width: "90%", height: "30px" }} placeholder="Emergency contact..." value={relation} onChange={(e) => setRelation(e.target.value)}/>
+                                </td>
+                               
+                                <td><b>Number#:</b><br /> 
+                                    <input type="text" name="eNumber" style={{ width: "90%", height: "30px" }} placeholder="Emergency contact..." value={ephone} onChange={onHandleTelephoneChange} />
+                                </td>
+                                
                             </tr>
                             <tr>
-                                <td colSpan="2"><b>Address:</b><br /> <input type="text" style={{ width: "95%", height: "30px" }} placeholder="Address..." /></td>
-                                <td><b>Insurance Provider:</b><br /> <input type="text" style={{ width: "90%", height: "30px" }} placeholder="Insurance provider..." /></td>
-                                <td><b>Ward:</b><br /> <input type="text" style={{ width: "90%", height: "30px" }} placeholder="Ward..." /></td>
+                                <td colSpan="2"><b>Address:</b><br /> 
+                                    <input type="text" style={{ width: "95%", height: "30px" }} placeholder="Address..." value={address} onChange={(e) => setAddress(e.target.value)}/>
+                                </td>
+                                <td><b>Insurance Provider:</b><br />
+                                    <input type="text" style={{ width: "90%", height: "30px" }} placeholder="Insurance provider..." value={provider} onChange={(e) => setProvider(e.target.value)} />
+                                </td>
+                                <td><b>Ward:</b><br /> 
+                                    <input type="text" style={{ width: "90%", height: "30px" }} placeholder="Ward..." value={wardNo}  onChange={handleWard} />
+                                </td>
                             </tr>
                             <tr>
-                                <td><b>Outstanding charge:</b><br /> <input type="text" style={{ width: "90%", height: "30px" }} placeholder="Charge..." /></td>
-                                <td colSpan="2"></td>
-                                <td><div className="add-button"> <Button text="Save"/></div></td>
+                                <td colSpan="1" style={{color:"red"}}>{message}</td>
+                                <td colSpan="3"></td>
+                                <td><div className="add-button"> <Button text="Save" onClick={onSubmit}/></div></td>
                             </tr>
                         </tbody>
                     </table>
