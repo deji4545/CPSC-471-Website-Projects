@@ -2,7 +2,7 @@ import React from 'react'
 import Button from '../Button'
 import { Link } from "react-router-dom";
 
-const ReceptionistItem = ({patient}) => {
+const ReceptionistItem = ({patient , deletePatient}) => {
     const id =patient.healthcard_no
     return (
 
@@ -27,7 +27,7 @@ const ReceptionistItem = ({patient}) => {
                     </tr>
                     <tr>
                         <td><Link to={{pathname:`/edit/reception/${id}`}}><Button text="Edit information" /></Link></td>
-                        <td><Button text="Delete" /></td>
+                        <td><Button text="Delete" onClick={ ()=>deletePatient(id) } /></td>
                     </tr>
                 </tbody>
             </table>

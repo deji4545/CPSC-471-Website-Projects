@@ -18,6 +18,10 @@ const Receptionist = () => {
         getPatients()
     }, [])
 
+
+    const deletPatient=(id) =>{
+        console.log(id)
+    }
     const fetchPatients = async () => {
         const res = await fetch('http://localhost:3000/api/reception/patient/', { method: "GET" })
         const data = await res.json()
@@ -38,7 +42,7 @@ const Receptionist = () => {
             return null
         }
     ).map((patient, index) => (
-        <ReceptionistItem key={index} patient={patient} />))
+        <ReceptionistItem key={index} patient={patient} deletePatient={deletPatient} />))
 
     return (
         <div className="main-content">
