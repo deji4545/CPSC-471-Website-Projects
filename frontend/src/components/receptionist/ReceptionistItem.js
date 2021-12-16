@@ -2,27 +2,26 @@ import React from 'react'
 import Button from '../Button'
 import { Link } from "react-router-dom";
 
-const ReceptionistItem = () => {
-    const id =123
+const ReceptionistItem = ({patient}) => {
+    const id =patient.healthcard_no
     return (
 
         <div className="item" style={{ fontSize: "12.5px" }}>
             <table >
                 <tbody>
                     <tr>
-                        <td><b>Healthcard #:</b><br /> Data </td>
-                        <td><b>Name:</b><br />Data</td>
-                        <td><b>Gender:</b><br />Data</td>
-                        <td><b>DOB:</b><br />Data</td>
+                        <td><b>Healthcard #:</b><br /> {patient.healthcard_no} </td>
+                        <td><b>Name:</b><br />{patient.fname +" "+ patient.m_initial+ " "+patient.lname}</td>
+                        <td><b>Gender:</b><br />{patient.gender}</td>
+                        <td><b>DOB:</b><br />{patient.dob}</td>
                     </tr>
                     <tr>
-                        <td style={{ columnSpan: "1" }}><b>Telephone #:</b><br />Data</td>
-                        <td style={{ columnSpan: "1" }}><b>Emergency contact:</b><br />Data</td>
-                        <td colSpan="2" ><b>Address:</b><br /> Data</td>
+                        <td style={{ columnSpan: "1" }}><b>Telephone #:</b><br />{patient.phone_number}</td>
+                        <td colSpan="3" ><b>Address:</b><br /> {patient.address}</td>
                     </tr>
                     <tr>
-                        <td><b>Ward:</b><br /> Data </td>
-                        <td><b>Insurance provider:</b><br />Data</td>
+                        <td><b>Ward:</b><br /> {patient.ward_no} </td>
+                        <td><b>Insurance provider:</b><br />{patient.insurance_provider}</td>
                         <td><b>Outstanding charge:</b><br />Data</td>
                         
                     </tr>
