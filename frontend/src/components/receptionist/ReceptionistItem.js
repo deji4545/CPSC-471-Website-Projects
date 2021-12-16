@@ -20,6 +20,11 @@ const ReceptionistItem = ({patient , deletePatient}) => {
                         <td colSpan="3" ><b>Address:</b><br /> {patient.address}</td>
                     </tr>
                     <tr>
+                        <td colSpan="2"><b>Emergency contact name:</b><br />{patient.phone_number}</td>
+                        <td colSpan="1" ><b>Emergency contact relationship:</b><br /> {patient.address}</td>
+                        <td colSpan="1" ><b>Emergency contact#:</b><br /> {patient.address}</td>
+                    </tr>
+                    <tr>
                         <td><b>Ward:</b><br /> {patient.ward_no} </td>
                         <td><b>Insurance provider:</b><br />{patient.insurance_provider}</td>
                         <td><b>Outstanding charge:</b><br />Data</td>
