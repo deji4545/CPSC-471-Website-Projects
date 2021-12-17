@@ -23,11 +23,11 @@ function App() {
           <Route path='/patient/:id' element={<Patient />} />
           <Route path="/edit/doctor/:id" element={<DoctorEdit />} />
           <Route path="/reception" element={<Receptionist />} />
-          <Route path="/edit/reception/:id" element={<ReceptionEdit />} />
+          <Route path="/edit/reception/:id/*" element={<ReceptionEdit />} />
           
           <Route path="/employee" element={<HR />} />
           <Route path="/showEmployee/:id" element={<Employee />} />
-          <Route path="/edit/hr/:id" element={<HREdit />} />
+          <Route path="/edit/hr/:id/*" element={<HREdit />} />
           
           <Route path="*" element={<Login />} />
         </Routes>
