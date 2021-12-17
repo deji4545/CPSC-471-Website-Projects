@@ -16,11 +16,14 @@ const Receptionist = () => {
         }
 
         getPatients()
-    }, [])
+    }, [patients])
 
 
     const deletPatient=(id) =>{
-        console.log(id)
+        fetch('http://localhost:3000/api/reception/patient/'+id, { method: "DELETE" })
+        .then(response => response)
+        .then(data => { setPatients([])   
+                    console.log(data)});
     }
     const fetchPatients = async () => {
         const res = await fetch('http://localhost:3000/api/reception/patient/', { method: "GET" })
