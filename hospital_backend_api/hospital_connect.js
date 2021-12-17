@@ -142,6 +142,7 @@ app.get('/api/reception/patient', (req, res) => {
 app.post('/api/reception/patient', (req, res) => {
     let patient = req.body;
     let sql = 'INSERT INTO patient SET ?';
+    console.log(req.body)
     connection.query(sql, patient, function (err, result) {
         if (err) throw err;
         res.send("The new patient has been added");
