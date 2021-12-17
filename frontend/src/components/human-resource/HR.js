@@ -8,6 +8,13 @@ const HR = () => {
     const [employees, setEmployees] = useState([])
     const [search, setSearch] = useState('')
 
+    const fetchEmployees = async () => {
+        const res = await fetch('http://localhost:3000/api/HR/staff', { method: "GET" })
+        const data = await res.json()
+
+        return data
+    }
+
     useEffect(() => {
         
         const getPatients = async () => {
@@ -20,12 +27,7 @@ const HR = () => {
         
     }, [])
 
-    const fetchEmployees = async () => {
-        const res = await fetch('http://localhost:3000/api/HR/staff', { method: "GET" })
-        const data = await res.json()
-
-        return data
-    }
+   
 
 
     const deleteEmployee=(id) =>{

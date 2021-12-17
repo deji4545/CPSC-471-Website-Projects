@@ -102,7 +102,7 @@ const HREdit = () => {
             setSalary(data.salary)
             setDependent(data.dependents)
 
-
+            return
         }
 
         if (id !== 'add') {
@@ -158,8 +158,13 @@ const HREdit = () => {
                     <tbody>
                         <tr>
                             <td><b>ID:</b><br />
-                                <input type="text" style={{ width: "90%", height: "30px" }} placeholder="ID..."
-                                    name="id" value={idNo} onChange={handleNumberChange} />
+                                
+                                    {id === "add" ?
+                                        <input type="text" style={{ width: "90%", height: "30px" }} placeholder="ID..."
+                                        name="id" value={idNo} onChange={handleNumberChange} /> :
+                                        <input type="text" style={{ width: "90%", height: "30px" }} placeholder="ID..."
+                                        name="id" value={idNo} onChange={handleNumberChange} readOnly />
+                                    }
                             </td>
                             <td><b>SIN:</b><br />
                                 <input type="text" style={{ width: "90%", height: "30px" }} placeholder="SIN..."
