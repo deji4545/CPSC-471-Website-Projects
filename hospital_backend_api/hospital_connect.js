@@ -17,24 +17,25 @@ function toConnect(sql, res) {
 }
 
 //Retrieve username and password
-// app.get('/api/login/:username/:password', (req, res) => {
-//     let sql = `SELECT * FROM LOGIN as L, STAFF as S WHERE L.staffid = ${req.params.username} 
-//     and L.staffid = S.id_no`
+app.get('/api/login/:username/:password', (req, res) => {
+    let sql = `SELECT * FROM LOGIN as L, STAFF as S WHERE L.staffid = ${req.params.username} 
+    and L.staffid = S.id_no`
 
-//     let login_result = { "staff_type": 'unknown', "login_correct": false };
+    let login_result = { "staff_type": "unknown", "login_correct": false };
 
-//     connection.query(sql, function (err, results) {
-//         if (err) throw err;
-//         if (results[0].staffid == req.params.username && results[0].password == req.params.password) {
-//             login_result.login_correct = true;
-//             login_result.staff_type = results[0].job;
+    connection.query(sql, function (err, results) {
+        if (err) throw err;
 
-//         }
-//         res.send(login_result);
-//     });
+        if (results[0].staffid == req.params.username && results[0].password == req.params.password) {
+            login_result.login_correct = true;
+            login_result.staff_type = results[0].job;
 
-//     toConnect(sql, res);
-// });
+        }
+        res.send(login_result);
+    });
+
+    toConnect(sql, res);
+});
 
 //Retrieve All  Medical Information for a specific Patient
 app.get('/api/patients/medical/information/:id', (req, res) => {
@@ -60,6 +61,17 @@ app.get('/api/patients/medical/information/:id', (req, res) => {
     });
 
 });
+
+//Insert a patient biometric
+app.post('/api/patients/medical/information/biometric', (req, res) => {
+    let biometric = req.body;
+    let sql = 'INSERT INTO biometric SET ?';
+    connection.query(sql, biometric, function (err, result) {
+        if (err) throw err;
+        res.send("A new biometric data has been Added");
+    });
+});
+
 
 //Retrieve a specific patient illness
 app.get('/api/patients/medical/information/illness/:id', (req, res) => {
@@ -97,24 +109,6 @@ app.post('/api/patients/medical/information/medication', (req, res) => {
         res.send("A new medication has been added");
     });
 });
-
-
-
-app.post('/api/patients/medical/information/illness', (req, res) => {
-    let diagnose_with = req.body;
-    let sql = 'INSERT INTO diagnose_with SET ?';
-    connection.query(sql, diagnose_with, function (err, result) {
-        if (err) throw err;
-        res.send("A new diagnosis has been Added");
-    });
-});
-
-
-
-
-
-
-
 
 
 
