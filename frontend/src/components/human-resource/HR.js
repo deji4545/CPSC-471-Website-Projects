@@ -28,6 +28,10 @@ const HR = () => {
 
     const deleteEmployee=(id) =>{
         console.log(id)
+        fetch('http://localhost:3000/api/HR/staff/'+id, { method: "DELETE" })
+        .then(response => response)
+        .then(data => { setEmployees([])   
+                    console.log(data)});
     }
 
     const data = employees.filter(
@@ -50,7 +54,7 @@ const HR = () => {
 
             <div className="search-box" >
                 Search: <input type="text" placeholder="Search..." value={search} onChange={(e) => setSearch(e.target.value)}/>
-                <div className="add-button"><Link to="/edit/hr"><Button text="Add Employee" /></Link></div>
+                <div className="add-button"><Link to="/edit/hr/add"><Button text="Add Employee" /></Link></div>
             </div>
             {employees.length > 0 ?
                 data

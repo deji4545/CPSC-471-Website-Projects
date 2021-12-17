@@ -144,10 +144,6 @@ const ReceptionEdit = () => {
         }
     }
 
-    const addPatients = () => {
-
-    }
-
     if (message === 'added patient') {
         return (<Routes>
             <Route path="/reception" element={<Receptionist />} />
@@ -170,7 +166,7 @@ const ReceptionEdit = () => {
                                     <br />
                                     {id === "add" ?
                                         <input type="text" style={{ width: "90%", height: "30px" }} placeholder="Healthcard #..." value={healthCard} onChange={(e) => setCard(e.target.value)} /> :
-                                        <input type="text" style={{ width: "90%", height: "30px" }} placeholder="Healthcard #..." value={healthCard} onChange={(e) => {}} />
+                                        <input type="text" style={{ width: "90%", height: "30px" }} placeholder="Healthcard #..." value={healthCard} onChange={(e) => setCard()} readOnly/>
                                     }
                                 </td>
                                 <td><b>Firstname:</b><br />
