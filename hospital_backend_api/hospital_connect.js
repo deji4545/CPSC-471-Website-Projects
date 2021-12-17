@@ -97,9 +97,6 @@ app.get('/api/patients/medical/information/:id', (req, res) => {
         res.send(record);
 
     });
-
-
-
 });
 
 
@@ -109,42 +106,6 @@ app.get('/api/doctor/patient', (req, res) => {
     let sql = 'SELECT * FROM PATIENT'
     toConnect(sql, res);
 });
-
-
-//Insert a patient biometric
-// 
-app.post('/api/patients/medical/information/biometric', (req, res) => {
-    let biometric = req.body;
-    let sql = 'INSERT INTO biometric SET ?';
-    connection.query(sql, biometric, function (err, result) {
-        if (err) throw err;
-        res.send("A new biometric data has been Added");
-    });
-});
-
-
-//Insert a patient illness 
-
-app.post('/api/patients/medical/information/illness', (req, res) => {
-    let diagnose_with = req.body;
-    let sql = 'INSERT INTO diagnose_with SET ?';
-    connection.query(sql, diagnose_with, function (err, result) {
-        if (err) throw err;
-        res.send("A new diagnosis has been Added");
-    });
-});
-
-
-//Insert patient medication
-app.post('/api/patients/medical/information/medication', (req, res) => {
-    let medication = req.body;
-    let sql = 'INSERT INTO medication SET ?';
-    connection.query(sql, medication, function (err, result) {
-        if (err) throw err;
-        res.send("A new medication has been added");
-    });
-});
-
 
 
 // HR API
