@@ -179,9 +179,6 @@ app.post('/api/HR/staff/dependents', (req, res) => {
 });
 
 
-//Update a dependent - has not been done yet, having some issues
-
-
 //PATIENT API
 
 //Retrieve Patient Information For reception 
