@@ -1,39 +1,61 @@
-import React from 'react'
+import { useState, useEffect } from 'react'
 import Button from '../Button'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 import { useParams, Link } from 'react-router-dom'
 
 
 const Employee = () => {
-    const {id} = useParams()
-    console.log(id)
+    const [employee, setEmployee] = useState(null)
+    const { id } = useParams()
     const backButton = <div><AiOutlineArrowLeft /><div style={{ fontSize: "12.5px", display: "inline" }}>Back</div></div>
+
+    useEffect(() => {
+        const fetchPatient = async () => {
+            const res = await fetch('http://localhost:3000/api/HR/staff/dependents/' + id, { method: "GET" })
+            const data = await res.json()
+
+            setEmployee(data)
+
+        }
+
+        if (id !== 'add') {
+            fetchPatient()
+        }
+    }, [id]);
+
+    if (employee === null) {
+        return (
+            <div className="main-content" >
+                <div className="item" style={{ fontSize: "15px" }} >
+                    <Link to="/employee"><Button text={backButton} /></Link>
+                    <div style={{ width: "100%", display: "block", marginTop: "25px" }}>
+                        Nothing to show...yet
+                    </div>
+                </div>
+            </div>
+        )
+    }
     return (
         <div className="main-content" >
             <div className="item" style={{ fontSize: "15px" }} >
                 <Link to="/employee"><Button text={backButton} /></Link>
                 <div style={{ width: "100%", display: "block" }}>
-                    <h2>Maka H Polova. <Link to={{pathname:`/edit/hr/${id}`}}><Button text="Edit" /></Link></h2>
+                    <h2>{employee.fname + " " + employee.m_initial + " " + employee.lname} <Link to={{ pathname: `/edit/hr/${id}` }}><Button text="Edit" /></Link></h2>
                 </div>
 
                 <table >
                     <tbody>
                         <tr>
-                            <td><b>ID:</b><br /> Data</td>
-                            <td><b>SIN:</b><br />Data</td>
-                            <td><b>Name:</b><br />Data</td>
-                            <td><b>Gender:</b><br />Data</td>
+                            <td><b>ID:</b><br /> {employee.id_no}</td>
+                            <td><b>SIN:</b><br />{employee.sin}</td>
+                            <td><b>Gender:</b><br />{employee.gender}</td>
+                            <td><b>DOB:</b><br />{employee.dob.substring(0, 10)}</td>
                         </tr>
                         <tr>
-                            <td><b>DOB:</b><br />s</td>
-                            <td style={{ columnSpan: "1" }}><b>Telephone #:</b><br />Data</td>
-                            <td colSpan="2" ><b>Address:</b><br /> Data</td>
-                        </tr>
-                        <tr>
-                            <td><b>Position:</b><br /> Data</td>
-                            <td><b>Start date:</b><br /> Data</td>
-                            <td><b>Salary:</b><br /> Data</td>
-                            <td><b>Benefits:</b><br /> Data</td>
+
+                            <td colSpan="2" ><b>Address:</b><br /> {employee.address}</td>
+                            <td><b>Position:</b><br /> {employee.job}</td>
+                            <td><b>Salary:</b><br /> {employee.salary}</td>
                         </tr>
                         <tr>
                             <td colSpan="2" className="special-table" >
@@ -45,11 +67,21 @@ const Employee = () => {
                                             <td><b>Relationship</b></td>
                                             <td><b>Phone number</b></td>
                                         </tr>
-                                        <tr>
-                                            <td>Martha</td>
-                                            <td>Mom</td>
-                                            <td>Mom</td>
-                                        </tr>
+
+                                        {
+                                            employee.dependents.map((dependent, index) => {
+                                                return (
+                                                    <tr key={index}>
+                                                        <td>{dependent.fname + " " + dependent.m_initial + " " + dependent.lname}</td>
+                                                        <td>{dependent.relationship}</td>
+                                                        <td>{dependent.phone_number}</td>
+                                                    </tr>
+                                                )
+                                            }
+
+                                            )
+                                        }
+
                                     </tbody>
                                 </table>
                             </td>

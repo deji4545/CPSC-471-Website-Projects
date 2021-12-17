@@ -13,10 +13,11 @@ const Receptionist = () => {
             const tasksFromServer = await fetchPatients()
             //   console.log(tasksFromServer)
             setPatients(tasksFromServer)
+            window.location.reload();
         }
 
         getPatients()
-    }, [patients])
+    }, [])
 
 
     const deletPatient=(id) =>{

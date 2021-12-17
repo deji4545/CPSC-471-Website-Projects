@@ -3,7 +3,7 @@ import Button from '../Button'
 import { useParams, Link, Routes, Route, Navigate } from 'react-router-dom'
 import Receptionist from './Receptionist'
 
-let filled= false
+
 
 const ReceptionEdit = () => {
     const onSubmit = () => {
@@ -103,7 +103,7 @@ const ReceptionEdit = () => {
                 seteMinit(patient.Em_initial)
                 setRelation(patient.Erelationship)
                 setePhone(patient.Ephone_number)
-                
+                return null
             })
            
         }
@@ -239,6 +239,6 @@ const ReceptionEdit = () => {
     )
 }
 
-filled= false
+
 
 export default ReceptionEdit

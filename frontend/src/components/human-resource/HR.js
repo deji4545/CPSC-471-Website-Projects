@@ -16,7 +16,7 @@ const HR = () => {
         }
 
         getPatients()
-    }, [employees])
+    }, [])
 
     const fetchEmployees = async () => {
         const res = await fetch('http://localhost:3000/api/HR/staff', { method: "GET" })
@@ -31,7 +31,8 @@ const HR = () => {
         fetch('http://localhost:3000/api/HR/staff/'+id, { method: "DELETE" })
         .then(response => response)
         .then(data => { setEmployees([])   
-                    console.log(data)});
+                    console.log(data)
+                    window.location.reload();});
     }
     
     const data = employees.filter(
