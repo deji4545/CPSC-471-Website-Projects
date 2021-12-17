@@ -172,9 +172,9 @@ app.post('/api/HR/staff/dependents', (req, res) => {
 //Retrieve Patient Information For reception 
 app.get('/api/reception/patient', (req, res) => {
     let sql = "SELECT P.healthcard_no, P.fname, P.m_initial, P.lname, P.gender, P.dob, P.address,\
-    P.phone_number, P.insurance_provider, ward_name, E.fname as 'E.fname',\
-    E.lname as 'E.lname', E.m_initial as 'E.m_initial', E.lname as 'E.lname', E.relationship as 'E.relationship',\
-    E.phone_number as 'E.phone_number'\
+    P.phone_number, P.insurance_provider, ward_name, E.fname as 'Efname',\
+    E.lname as 'Elname', E.m_initial as 'Em_initial', E.lname as 'Elname', E.relationship as 'Erelationship',\
+    E.phone_number as 'Ephone_number'\
     FROM PATIENT as P, MEDICAL_WARD as M, EMERGENCY_CONTACT as E\
     WHERE P.ward_no = M.ward_no and P.healthcard_no = E.healthcard_no";
     toConnect(sql, res);
