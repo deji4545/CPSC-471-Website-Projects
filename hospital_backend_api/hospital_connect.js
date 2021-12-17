@@ -145,6 +145,17 @@ app.put('/api/HR/staff', (req, res) => {
     });
 });
 
+//Delete HR staff
+app.delete('/api/HR/staff/:id', (req, res) => {
+    let sql = `DELETE FROM staff WHERE id_no = ${req.params.id}`;
+    connection.query(sql, function (err, result) {
+        if (err) throw err;
+        res.send("The Staff Has Been Deleted");
+    });
+
+});
+
+
 
 //Retrieve all the dependents for a specific staff
 app.get('/api/HR/staff/dependents/:id', (req, res) => {
