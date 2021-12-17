@@ -136,11 +136,6 @@ app.get('/api/reception/patient', (req, res) => {
     toConnect(sql, res);
 });
 
-// Retrieve Emergency Contact for a specific patient
-app.get('/api/reception/patient/emergecy_contact/:id', (req, res) => {
-    let sql = `SELECT * FROM EMERGENCY_CONTACT WHERE healthcard_no = ${req.params.id} `;
-    toConnect(sql, res);
-});
 
 
 //Add new patient 
@@ -164,6 +159,36 @@ app.put('/api/reception/patient', (req, res) => {
         res.send("Patient Update Succesful");
     });
 });
+
+
+// Retrieve Emergency Contact for a specific patient
+// app.get('/api/reception/patient/emergecy_contact/:id', (req, res) => {
+//     let sql = `SELECT * FROM EMERGENCY_CONTACT WHERE healthcard_no = ${req.params.id} `;
+//     toConnect(sql, res);
+// });
+
+
+//Insert Emergency Contact
+app.post('/api/reception/emergecy_contact', (req, res) => {
+    let patient = req.body;
+    let sql = 'INSERT INTO emergecy_contact SET ?';
+    connection.query(sql, patient, function (err, result) {
+        if (err) throw err;
+        res.send("The new emergenct contact has been added");
+    });
+});
+
+//Update a emergency contact 
+app.put('/api/reception/emergecy_contact', (req, res) => {
+    let patient = req.body;
+    let sql = `UPDATE emergecy_contact SET ? WHERE healthcard_no = ${patient.healthcard_no} `;
+    connection.query(sql, patient, function (err, result) {
+        if (err) throw err;
+        res.send("Emergency Contacy Update Succesful");
+    });
+});
+
+
 
 
 
