@@ -49,7 +49,7 @@ const Receptionist = () => {
 
             <div className="search-box" >
                 Search: <input type="text" placeholder="Search..." value={search} onChange={(e) => setSearch(e.target.value)} />
-                <div className="add-button"><Link to="/edit/reception"><Button text="Add Patients" /></Link></div>
+                <div className="add-button"><Link to="/edit/reception/add"><Button text="Add Patients" /></Link></div>
             </div>
             {patients.length > 0 ?
                 data

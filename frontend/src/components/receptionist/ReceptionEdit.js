@@ -1,7 +1,9 @@
-import { useState } from 'react'
+import { useState,useEffect } from 'react'
 import Button from '../Button'
 import { useParams, Link, Routes, Route, Navigate } from 'react-router-dom'
 import Receptionist from './Receptionist'
+
+let filled= false
 
 const ReceptionEdit = () => {
     const onSubmit = () => {
@@ -10,9 +12,14 @@ const ReceptionEdit = () => {
             setMessage('No input can be empty')
             return;
         }
-
+        let method= 'POST'
+        if(id==="add"){
+            method='POST'
+        } else{
+            method='PUT'
+        }
         const patientOption = {
-            method: 'POST',
+            method: method,
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 healthcard_no: parseInt(healthCard),
@@ -29,25 +36,25 @@ const ReceptionEdit = () => {
         }
 
         const emergencyOption = {
-            method: 'POST',
+            method: method,
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 healthcard_no: parseInt(healthCard),
                 fname: fname,
                 m_initial: mInit,
                 lname: lname,
-                relationship:relation,
+                relationship: relation,
                 phone_number: parseInt(phone)
             })
         }
 
         fetch('http://localhost:3000/api/reception/patient', patientOption)
             .then(response => response)
-            .then(data => {  });
+            .then(data => { });
 
         fetch('http://localhost:3000/api/reception/emergency_contact', emergencyOption)
             .then(response => response)
-            .then(data => { setMessage('added patient') });    
+            .then(data => { setMessage('added patient') });
     }
     const [healthCard, setCard] = useState("")
     const [fname, setFname] = useState("")
@@ -67,9 +74,43 @@ const ReceptionEdit = () => {
     const [wardNo, setWard] = useState("")
     const [provider, setProvider] = useState("")
     const [message, setMessage] = useState("")
+    const [fill,setFill] =useState(false)
+
+    
 
     const { id } = useParams()
-    // console.log("Helo"+id)
+    
+    useEffect(() => {
+        const fetchPatient = async () => {
+            const res = await fetch('http://localhost:3000/api/reception/patient/' + id, { method: "GET" })
+            const data = await res.json()
+    
+            data.map((patient, index) => {
+                setCard(patient.healthcard_no)
+                setFname(patient.fname)
+                setLname(patient.lname)
+                setMinit(patient.m_initial)
+                setGender(patient.gender)
+                setDOB(patient.dob.substring(0,10))
+                setAddress(patient.address)
+                setPhone(patient.phone_number)
+                setProvider(patient.insurance_provider)
+                setWard(patient.ward_no)
+                seteFname(patient.Efname)
+                seteLname(patient.Elname)
+                seteMinit(patient.Em_initial)
+                setRelation(patient.Erelationship)
+                setePhone(patient.Ephone_number)
+                
+            })
+           setFill(true)
+        }
+        if (id !== 'add' && fill ===false) {
+            fetchPatient()
+        }
+      }, [fill,id]);
+
+    
     const backButton = <div style={{ fontSize: "12.5px", display: "inline" }}>Cancel</div>
 
     const onHandleTelephoneChange = e => {
@@ -121,7 +162,11 @@ const ReceptionEdit = () => {
                         <tbody>
                             <tr>
                                 <td><b>Health card #:</b>
-                                    <br /> <input type="text" style={{ width: "90%", height: "30px" }} placeholder="Healthcard #..." value={healthCard} onChange={(e) => setCard(e.target.value)} />
+                                    <br />
+                                    {id === "add" ?
+                                        <input type="text" style={{ width: "90%", height: "30px" }} placeholder="Healthcard #..." value={healthCard} onChange={(e) => setCard(e.target.value)} /> :
+                                        <input type="text" style={{ width: "90%", height: "30px" }} placeholder="Healthcard #..." value={healthCard} onChange={(e) => {}} />
+                                    }
                                 </td>
                                 <td><b>Firstname:</b><br />
                                     <input type="text" style={{ width: "90%", height: "30px" }} placeholder="Firstname..." value={fname} onChange={(e) => setFname(e.target.value)} />
@@ -195,5 +240,7 @@ const ReceptionEdit = () => {
         </div>
     )
 }
+
+filled= false
 
 export default ReceptionEdit
