@@ -28,11 +28,26 @@ const ReceptionEdit = () => {
             })
         }
 
-        console.log(patientOption.body)
+        const emergencyOption = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                healthcard_no: parseInt(healthCard),
+                fname: fname,
+                m_initial: mInit,
+                lname: lname,
+                relationship:relation,
+                phone_number: parseInt(phone)
+            })
+        }
 
         fetch('http://localhost:3000/api/reception/patient', patientOption)
             .then(response => response)
-            .then(data => { setMessage('added patient') });
+            .then(data => {  });
+
+        fetch('http://localhost:3000/api/reception/emergency_contact', emergencyOption)
+            .then(response => response)
+            .then(data => { setMessage('added patient') });    
     }
     const [healthCard, setCard] = useState("")
     const [fname, setFname] = useState("")

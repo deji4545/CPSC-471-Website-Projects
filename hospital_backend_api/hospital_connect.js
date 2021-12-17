@@ -17,12 +17,12 @@ function toConnect(sql, res) {
 }
 
 //Retrieve username and password
-app.get('/api/:username/:password', (req, res) => {
-    let sql = `SELECT * FROM LOGIN as L, STAFF as S WHERE L.staffid = ${req.params.username} 
-    and L.password = ${req.params.password} and L.staffid = S.id_no`
-    toConnect(sql, res);
+// app.get('/api/:username/:password', (req, res) => {
+//     let sql = `SELECT * FROM LOGIN as L, STAFF as S WHERE L.staffid = ${req.params.username} 
+//     and L.password = ${req.params.password} and L.staffid = S.id_no`
+//     toConnect(sql, res);
 
-});
+// });
 //Retrieve All  Medical Information for a specific Patient
 app.get('/api/patients/medical/information/:id', (req, res) => {
 
