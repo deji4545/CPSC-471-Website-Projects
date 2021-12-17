@@ -42,13 +42,13 @@ app.get('/api/login/:username/:password', (req, res) => {
 });
 
 //Retrieve All  Medical Information for a specific Patient
-//
+
 app.get('/api/patients/medical/information/:id', (req, res) => {
 
-    let sql_biometric = `SELECT * FROM BIOMETRIC as B WHERE B.h_no = ${req.params.id} `;
-    let sql_illness = `SELECT * FROM DIAGNOSED_WITH  WHERE healthcard_no = ${req.params.id} `;
+    let sql_biometric = `SELECT * FROM BIOMETRIC as B WHERE B.h_no = ? `;
+    let sql_illness = `SELECT * FROM DIAGNOSED_WITH  WHERE healthcard_no = ? `;
     let sql_medication = `SELECT drug_name, dose, frequency_per_day
-    FROM DIAGNOSED_WITH as D, MEDICATION as M WHERE D.healthcard_no = ${req.params.id}
+    FROM DIAGNOSED_WITH as D, MEDICATION as M WHERE D.healthcard_no = ?
     and D.treat_no = M.t_no`;
     let sql_patient = `SELECT * FROM PATIENT WHERE healthcard_no = ? `
 
@@ -64,7 +64,7 @@ app.get('/api/patients/medical/information/:id', (req, res) => {
 
     });
 
-    connection.query(sql_biometric, function (err, results) {
+    connection.query(sql_biometric, req.params.id, function (err, results) {
         if (err) throw err;
 
         for (let i = 0; i < results.length; i++) {
@@ -75,23 +75,20 @@ app.get('/api/patients/medical/information/:id', (req, res) => {
             biometeric["date"].push(results[i].date)
         }
         record["biometric"] = biometeric;
-        //res.send(record);
-
     });
 
-    connection.query(sql_illness, function (err, results) {
+    connection.query(sql_illness, req.params.id, function (err, results) {
         if (err) throw err;
         record["illness"] = results;
-        //res.send(record);
     });
 
-    connection.query(sql_illness, function (err, results) {
+    connection.query(sql_illness, req.params.id, function (err, results) {
         if (err) throw err;
         record["illness"] = results;
-        //res.send(record);
+
     });
 
-    connection.query(sql_medication, function (err, results) {
+    connection.query(sql_medication, req.params.id, function (err, results) {
         if (err) throw err;
         record["medication"] = results;
         res.send(record);
@@ -100,6 +97,14 @@ app.get('/api/patients/medical/information/:id', (req, res) => {
 
 
 });
+
+
+//Retrieve All Patients for a doctor 
+app.get('/api/doctor/patient', (req, res) => {
+    let sql = 'SELECT * FROM PATIENT'
+    toConnect(sql, res);
+});
+
 
 //Insert a patient biometric
 app.post('/api/patients/medical/information/biometric', (req, res) => {
