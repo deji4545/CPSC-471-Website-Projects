@@ -125,7 +125,7 @@ const Patient = () => {
             <div className="item" style={{ fontSize: "15px" }} >
                 <Link to={{ pathname: `/patient` }}><Button text={backButton} /></Link>
                 <div style={{ width: "100%", display: "block" }}>
-                    <h2>{patientVal.fname + " " + patientVal.m_initial + " " + patientVal.lname}. <Link to={{ pathname: `/edit/doctor/${id}` }}><Button text="Edit" /></Link></h2>
+                    <h2>{patientVal.fname + " " + patientVal.m_initial + " " + patientVal.lname}. </h2>
                 </div>
 
                 <table >
@@ -269,16 +269,16 @@ const Patient = () => {
                                 <table >
                                     <tbody>
                                         <tr>
-                                            <td><b>Medication</b></td>
-                                            <td><b>Dose</b></td>
-                                            <td><b>Frequency</b></td>
+                                            <td><b>Type</b></td>
+                                            <td><b>Date</b></td>
+                                            
                                         </tr>
-                                        {patient.medication.map((val,index) =>
+                                        {patient.surgery.map((val,index) =>
                                         (
                                             <tr key={index}>
-                                                <td style={{overflow:"auto"}}>{val.drug_name}</td>
-                                                <td>{val.dose}</td>
-                                                <td>{val.frequency_per_day}</td>
+                                                <td style={{overflow:"auto"}}>{val.type}</td>
+                                                <td>{val.date.substring(0,10)}</td>
+                                                
                                             </tr>
                                         )
                                         )

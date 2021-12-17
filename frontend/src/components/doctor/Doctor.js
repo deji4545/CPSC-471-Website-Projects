@@ -10,9 +10,9 @@ const Doctor = () => {
 
 
     useEffect(() => {
-        // if (sessionStorage.getItem('type') !== 'reception') {
-        //     return null
-        // }
+        if (sessionStorage.getItem('type') !== 'nurse'&&sessionStorage.getItem('type') !== 'doctor') {
+            return null
+        }
         const getPatients = async () => {
             const tasksFromServer = await fetchPatients()
             //   console.log(tasksFromServer)
@@ -51,15 +51,15 @@ const Doctor = () => {
         console.log('under the water')
     } 
     // PLEASE UMAR REMEMBER TO UNCOMMENT
-    // if (sessionStorage.getItem('type') !== 'doctor' && sessionStorage.getItem('type') !== 'nurse' ) {
-    //     console.log('here')
-    //     return (
-    //         <Routes>
-    //             <Route path="/" element={<Navigate replace to="/" />} />
-    //             {/* <Route path="*" element={<Navigate replace to="/" />} /> */}
-    //         </Routes>
-    //     )
-    // }
+    if (sessionStorage.getItem('type') !== 'doctor' && sessionStorage.getItem('type') !== 'nurse' ) {
+        console.log('here')
+        return (
+            <Routes>
+                <Route path="/" element={<Navigate replace to="/" />} />
+                {/* <Route path="*" element={<Navigate replace to="/" />} /> */}
+            </Routes>
+        )
+    }
     return (
         <div className="main-content"style={{marginTop:"25px"}}>
         <div><Button text="Logout"  onClick={onLogout}/></div>

@@ -37,7 +37,7 @@ const Employee = () => {
     }
     return (
         <div className="main-content" style={{marginTop:"25px"}}>
-            <div><Button text="Logout" /></div>
+            
             <div className="item" style={{ fontSize: "15px" }} >
                 <Link to="/employee"><Button text={backButton} /></Link>
                 <div style={{ width: "100%", display: "block" }}>

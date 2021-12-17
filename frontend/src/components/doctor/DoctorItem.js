@@ -19,13 +19,13 @@ const DoctorItem = ({patient}) => {
                         <td colSpan="3" ><b>Address:</b><br /> {patient.address}</td>
                     </tr>
                     <tr>
-                        <td><b>Ward:</b><br /> {patient.ward_name} </td>
+                        <td><b>Ward:</b><br /> {patient.ward_no} </td>
                         <td><b>Insurance provider:</b><br />{patient.insurance_provider}</td>        
                     </tr>
                     <tr>
-                        <td><Link to={{pathname:`/edit/doctor/${id}`}}>
+                        {/* <td><Link to={{pathname:`/edit/doctor/${id}`}}>
                             <Button text="Edit information" />
-                        </Link></td>
+                        </Link></td> */}
                         <td><Link to={{pathname:`${id}`}}>
                             <Button text="View Details" />
                         </Link></td>

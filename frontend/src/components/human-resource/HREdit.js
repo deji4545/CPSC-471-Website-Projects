@@ -99,7 +99,8 @@ const HREdit = () => {
             setDOB(data.dob.substring(0, 10))
             setAddress(data.address)
             setPostion(data.job)
-            setSalary(data.salary)
+            const salary=data.salary.toString()
+            setSalary(salary.substring(0,salary.indexOf('.')))
             setDependent(data.dependents)
 
             return
