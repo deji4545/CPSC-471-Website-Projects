@@ -190,7 +190,7 @@ app.post('/api/HR/staff/dependents', (req, res) => {
 
 //Delete Dependents
 app.delete('/api/HR/staff/dependents/:id_no/:fname/:lname', (req, res) => {
-    let sql = `DELETE FROM dependents WHERE id_no = ${req.params.id_no} and fname = '${req.params.fname}' and lname = '${req.params.lname}' `;
+    let sql = `DELETE FROM dependents WHERE id_no = ${req.params.id_no} and fname = '${req.params.fname}' and lname = '${req.params.lname}'`;
     connection.query(sql, function (err, result) {
         if (err) throw err;
         res.send("The Depedents Has Been Deleted");
