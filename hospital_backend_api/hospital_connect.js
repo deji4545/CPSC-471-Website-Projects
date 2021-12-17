@@ -17,27 +17,24 @@ function toConnect(sql, res) {
 }
 
 //Retrieve username and password
-// app.get('/api/:username/:password', (req, res) => {
-//     let sql = `SELECT * FROM LOGIN as L, STAFF as S WHERE L.staffid = ${req.params.username} 
-//     and L.staffid = S.id_no`
+app.get('/api/:username/:password', (req, res) => {
+    let sql = `SELECT * FROM LOGIN as L, STAFF as S WHERE L.staffid = ${req.params.username} 
+    and L.staffid = S.id_no`
 
-//     let login_result = {"staff_type": 'unknown', "login_correct": false};
+    let login_result = { "staff_type": 'unknown', "login_correct": false };
 
-//     connection.query(sql, function (err, results) {
-//         if (err) throw err;
-//         if(results[0].staffid == req.params.username && results[0].password == req.params.password){
-//             login.login_correct = true;
-//             login.staff_type = results[0/]
+    connection.query(sql, function (err, results) {
+        if (err) throw err;
+        if (results[0].staffid == req.params.username && results[0].password == req.params.password) {
+            login_result.login_correct = true;
+            login_result.staff_type = results[0].job;
 
-//         }
-//         res.send(login_result);
+        }
+        res.send(login_result);
+    });
 
-//     });
-
-
-//     toConnect(sql, res);
-
-// });
+    toConnect(sql, res);
+});
 //Retrieve All  Medical Information for a specific Patient
 app.get('/api/patients/medical/information/:id', (req, res) => {
 
