@@ -27,9 +27,8 @@ function App() {
           
           <Route path="/employee" element={<HR />} />
           <Route path="/employee/:id" element={<Employee />} />
-          <Route path="/edit/hr" element={<HREdit />} >
-            <Route path=":id" element={<HREdit />} />
-          </Route>
+          <Route path="/edit/hr/:id" element={<HREdit />} />
+          
           <Route path="*" element={<Login />} />
         </Routes>
 
