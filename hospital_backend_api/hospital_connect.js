@@ -16,24 +16,22 @@ function toConnect(sql, res) {
     });
 }
 
+//Retrieve username and password
+app.get('/api/:username/:password', (req, res) => {
+    let sql = `SELECT * FROM LOGIN as L, STAFF as S WHERE L.staffid = ${req.params.username} 
+    and L.password = ${req.params.password} and L.staffid = S.id_no`
+    toConnect(sql, res);
 
-
+});
 //Retrieve All  Medical Information for a specific Patient
 app.get('/api/patients/medical/information/:id', (req, res) => {
-    let weight; //array of weight
-    let height;
-    let temperature;
-    let bloodSugar;
-    let illness;
-    let medication;
-    let surgery;
 
     let sql = `SELECT * FROM BIOMETRIC as B WHERE B.h_no = ${req.params.id} `
-    let sql2 = `SELECT name, date_diagnosed FROM DIAGNOSED_WITH WHERE healthcard_no = ${req.params.id}`
+    //let sql2 = `SELECT name, date_diagnosed FROM DIAGNOSED_WITH WHERE healthcard_no = ${req.params.id}`
 
 
     let biometeric = { "height": [], "bloodsugar": [], "bloodpressure_s": [], "bloodpressure_d": [], "date": [] }
-    let record = { "biometric": {}, "illness": {} }
+    //let record = { "biometric": {}, "illness": {} }
 
 
     connection.query(sql, function (err, results) {
@@ -46,24 +44,71 @@ app.get('/api/patients/medical/information/:id', (req, res) => {
             biometeric["bloodpressure_d"].push(results[i].bloodpressure_d)
             biometeric["date"].push(results[i].date)
         }
-        record["biometric"] = biometeric;
+        //record["biometric"] = biometeric;
+        res.send(biometeric);
 
     });
 
-    connection.query(sql2, function (err, results) {
+});
+
+//Retrieve a specific patient illness
+app.get('/api/patients/medical/information/illness/:id', (req, res) => {
+    let sql = `SELECT * FROM DIAGNOSED_WITH  WHERE healthcard_no = ${req.params.id} `
+    toConnect(sql, res);
+
+});
+
+//Insert a patient illness 
+app.post('/api/patients/medical/information/illness', (req, res) => {
+    let diagnose_with = req.body;
+    let sql = 'INSERT INTO diagnose_with SET ?';
+    connection.query(sql, diagnose_with, function (err, result) {
         if (err) throw err;
-        record["illness"] = results;
-        res.send(record);
-
+        res.send("A new diagnosis has been Added");
     });
+});
 
 
+//Retrieve a patient medication plan 
+app.get('/api/patients/medical/information/medication/:id', (req, res) => {
+    let sql = `SELECT drug_name, dose, frequency_per_day
+    FROM DIAGNOSED_WITH as D, MEDICATION as M WHERE D.healthcard_no = ${req.params.id}
+    and D.treat_no = M.t_no`
+    toConnect(sql, res);
+
+});
+
+//Retrieve a patient medication
+app.post('/api/patients/medical/information/medication', (req, res) => {
+    let medication = req.body;
+    let sql = 'INSERT INTO medication SET ?';
+    connection.query(sql, medication, function (err, result) {
+        if (err) throw err;
+        res.send("A new medication has been added");
+    });
 });
 
 
 
-// HR API
 
+app.post('/api/patients/medical/information/illness', (req, res) => {
+    let diagnose_with = req.body;
+    let sql = 'INSERT INTO diagnose_with SET ?';
+    connection.query(sql, diagnose_with, function (err, result) {
+        if (err) throw err;
+        res.send("A new diagnosis has been Added");
+    });
+});
+
+
+
+
+
+
+
+
+
+// HR API
 //Retrieve all the Staff Information For HR 
 app.get('/api/HR/staff', (req, res) => {
     let sql = 'SELECT * FROM STAFF'
@@ -132,7 +177,6 @@ app.get('/api/reception/patient', (req, res) => {
     E.phone_number as 'E.phone_number'\
     FROM PATIENT as P, MEDICAL_WARD as M, EMERGENCY_CONTACT as E\
     WHERE P.ward_no = M.ward_no and P.healthcard_no = E.healthcard_no";
-
     toConnect(sql, res);
 });
 
@@ -160,7 +204,6 @@ app.put('/api/reception/patient', (req, res) => {
         res.send("Patient Update Succesful");
     });
 });
-
 
 
 
