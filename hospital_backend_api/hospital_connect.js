@@ -180,11 +180,17 @@ app.get('/api/reception/patient', (req, res) => {
     toConnect(sql, res);
 });
 
-//Retrieve Patient Information For reception 
-app.get('/api/reception/specific_patient/:id', (req, res) => {
-    let sql = `SELECT * FROM PATIENT WHERE healthcare_no = ${req.params.id}`;
+//Retrieve specific Patient Information For reception 
+app.get('/api/reception/patient/:id', (req, res) => {
+    let sql = `SELECT P.healthcard_no, P.fname, P.m_initial, P.lname, P.gender, P.dob, P.address,
+    P.phone_number, P.insurance_provider, ward_name, E.fname as 'E.fname',
+    E.lname as 'E.lname', E.m_initial as 'E.m_initial', E.lname as 'E.lname', E.relationship as 'E.relationship',
+    E.phone_number as 'E.phone_number'
+    FROM PATIENT as P, MEDICAL_WARD as M, EMERGENCY_CONTACT as E\
+    WHERE P.ward_no = M.ward_no and P.healthcard_no = E.healthcard_no and P.healthcard_no = ${req.params.id} `;
     toConnect(sql, res);
 });
+
 
 
 
