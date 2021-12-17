@@ -21,7 +21,7 @@ app.get('/api/login/:username/:password', (req, res) => {
     let sql = `SELECT * FROM LOGIN as L, STAFF as S WHERE L.staffid = ${req.params.username} 
     and L.staffid = S.id_no`
 
-    let login_result = { "staff_type": "unknown", "login_correct": false };
+    let login_result = { "staff_type": 'unknown', "login_correct": false };
 
     connection.query(sql, function (err, results) {
         if (err) throw err;
@@ -34,7 +34,6 @@ app.get('/api/login/:username/:password', (req, res) => {
         res.send(login_result);
     });
 
-    toConnect(sql, res);
 });
 
 //Retrieve All  Medical Information for a specific Patient
