@@ -5,8 +5,7 @@ import HR from './HR'
 
 const HREdit = () => {
     const onSubmit = () => {
-        if (idNo === "" || sin === "" || fname === "" || lname === "" || m_initial === "" || gender === "" || address === "" || dob === "" || position === "" || salary === "" ||
-            dfname === "" || dlname === "" || dm_initial === "" || relationship === "" || phone === "") {
+        if (idNo === "" || sin === "" || fname === "" || lname === "" || m_initial === "" || gender === "" || address === "" || dob === "" || position === "" || salary === "") {
             setMessage('No input can be empty')
             return;
         }
@@ -44,7 +43,7 @@ const HREdit = () => {
                 m_initial: dm_initial,
                 lname: dlname,
                 relationship: relationship,
-                phone_number:parseInt(phone)
+                phone_number: parseInt(phone)
             })
         }
 
@@ -52,13 +51,17 @@ const HREdit = () => {
             .then(response => response)
             .then(data => { console.log(data) });
 
-        fetch('http://localhost:3000/api/HR/staff/dependents', dependentOption)
-            .then(response => response)
-            .then(data => {
-                setMessage('added employee')
-                console.log(data)
-            });
+        if (dfname !== "" && dlname !== "" && dm_initial !== "" && relationship !== "" && phone !== "") {
+            fetch('http://localhost:3000/api/HR/staff/dependents', dependentOption)
+                .then(response => response)
+                .then(data => {
 
+                    console.log(data)
+                });
+        }
+
+        setMessage('added employee')
+    
     }
 
     const [idNo, setID] = useState("")
@@ -86,7 +89,7 @@ const HREdit = () => {
             const res = await fetch('http://localhost:3000/api/HR/staff/dependents/' + id, { method: "GET" })
             const data = await res.json()
 
-            
+
             setSin(data.sin)
             setID(data.id_no)
             setFname(data.fname)
@@ -106,7 +109,7 @@ const HREdit = () => {
             fetchEmployee()
         }
     }, [id]);
-    
+
     const handleNumberChange = e => {
         let value = e.target.value;
         let name = e.target.name;
@@ -133,6 +136,9 @@ const HREdit = () => {
     };
     const backButton = <div style={{ fontSize: "12.5px", display: "inline" }}>Cancel</div>
 
+    const deleteDependent=(dependentToDelete)=>{
+        console.log(dependentToDelete)
+    }
 
     if (message === 'added employee') {
         return (<Routes>
@@ -197,7 +203,7 @@ const HREdit = () => {
                         </tr>
                         {id === "add" ? <></> :
                             <tr>
-                                <td colSpan="3" className="special-table" >
+                                <td colSpan="4" className="special-table" >
                                     <h3>Dependents: </h3>
                                     <table >
                                         <tbody>
@@ -207,12 +213,13 @@ const HREdit = () => {
                                                 <td><b>Phone</b></td>
                                             </tr>
                                             {
-                                                dependent.map((dependent,index) => {
+                                                dependent.map((dependent, index) => {
                                                     return (
                                                         <tr key={index}>
-                                                            <td>{dependent.fname+" "+dependent.m_initial+" "+dependent.lname}</td>
+                                                            <td>{dependent.fname + " " + dependent.m_initial + " " + dependent.lname}</td>
                                                             <td>{dependent.relationship}</td>
                                                             <td>{dependent.phone_number}</td>
+                                                            <td><Button text="Delete" onClick={()=>deleteDependent(dependent)} /></td>
                                                         </tr>
                                                     )
                                                 }

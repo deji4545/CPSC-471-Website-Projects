@@ -13,7 +13,7 @@ const Receptionist = () => {
             const tasksFromServer = await fetchPatients()
             //   console.log(tasksFromServer)
             setPatients(tasksFromServer)
-            window.location.reload();
+            
         }
 
         getPatients()
@@ -23,8 +23,9 @@ const Receptionist = () => {
     const deletPatient=(id) =>{
         fetch('http://localhost:3000/api/reception/patient/'+id, { method: "DELETE" })
         .then(response => response)
-        .then(data => { setPatients([])   
+        .then(data => {window.location.reload(); setPatients([])   
                     console.log(data)});
+                    
     }
     const fetchPatients = async () => {
         const res = await fetch('http://localhost:3000/api/reception/patient/', { method: "GET" })

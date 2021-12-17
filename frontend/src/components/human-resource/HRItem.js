@@ -3,7 +3,7 @@ import Button from '../Button'
 import {Link } from 'react-router-dom'
 const HRItem = ({employee, deleteEmployee}) => {
     const id = employee.id_no
-    
+
 
     return (
         <div className="item" style={{ fontSize: "12.5px" }}>
@@ -24,7 +24,7 @@ const HRItem = ({employee, deleteEmployee}) => {
                     <tr>
                         <td><Link to={{pathname:`/edit/hr/${id}`}}><Button text="Edit information" /></Link></td>
                         <td><Button text="Delete" onClick={ ()=>deleteEmployee(id) }/></td>
-                        <td><Link to={{pathname:`/employee/${id}`}}><Button text="View details" /></Link></td>
+                        <td><Link to={{pathname:`/showEmployee/${id}`}}><Button text="View details" /></Link></td>
                     </tr>
                 </tbody>
             </table>

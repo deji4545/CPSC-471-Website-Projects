@@ -9,6 +9,7 @@ const HR = () => {
     const [search, setSearch] = useState('')
 
     useEffect(() => {
+        
         const getPatients = async () => {
             const tasksFromServer = await fetchEmployees()
             //   console.log(tasksFromServer)
@@ -16,6 +17,7 @@ const HR = () => {
         }
 
         getPatients()
+        
     }, [])
 
     const fetchEmployees = async () => {
@@ -30,9 +32,10 @@ const HR = () => {
         console.log(id)
         fetch('http://localhost:3000/api/HR/staff/'+id, { method: "DELETE" })
         .then(response => response)
-        .then(data => { setEmployees([])   
+        .then(data => { window.location.reload(); setEmployees([])   
                     console.log(data)
-                    window.location.reload();});
+                    });
+                   
     }
     
     const data = employees.filter(
