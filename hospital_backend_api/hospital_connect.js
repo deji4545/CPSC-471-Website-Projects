@@ -17,13 +17,17 @@ function toConnect(sql, res) {
 }
 
 //Retrieve username and password
+//http://localhost:3000/api/login/81595444/GGcD7eGJQ
 app.get('/api/login/:username/:password', (req, res) => {
-    let sql = `SELECT * FROM LOGIN as L, STAFF as S WHERE L.staffid = ${req.params.username} 
+
+
+
+    let sql = `SELECT * FROM LOGIN as L, STAFF as S WHERE L.staffid = ?
     and L.staffid = S.id_no`
 
     let login_result = { "staff_type": 'unknown', "login_correct": false };
 
-    connection.query(sql, function (err, results) {
+    connection.query(sql, req.params.username, function (err, results) {
         if (err) throw err;
 
         if (results.length > 0 && results[0].staffid == req.params.username && results[0].password == req.params.password) {
@@ -38,13 +42,15 @@ app.get('/api/login/:username/:password', (req, res) => {
 });
 
 //Retrieve All  Medical Information for a specific Patient
+//
 app.get('/api/patients/medical/information/:id', (req, res) => {
 
-    let sql = `SELECT * FROM BIOMETRIC as B WHERE B.h_no = ${req.params.id} `;
+    let sql_biometric = `SELECT * FROM BIOMETRIC as B WHERE B.h_no = ${req.params.id} `;
     let sql_illness = `SELECT * FROM DIAGNOSED_WITH  WHERE healthcard_no = ${req.params.id} `;
     let sql_medication = `SELECT drug_name, dose, frequency_per_day
     FROM DIAGNOSED_WITH as D, MEDICATION as M WHERE D.healthcard_no = ${req.params.id}
     and D.treat_no = M.t_no`;
+    let sql_patient = `SELECT * FROM PATIENT WHERE healthcard_no = ? `
 
 
 
@@ -52,7 +58,13 @@ app.get('/api/patients/medical/information/:id', (req, res) => {
     let biometeric = { "height": [], "bloodsugar": [], "bloodpressure_s": [], "bloodpressure_d": [], "date": [] }
 
 
-    connection.query(sql, function (err, results) {
+    connection.query(sql_patient, req.params.id, function (err, results) {
+        if (err) throw err;
+        record["patient"] = results;
+
+    });
+
+    connection.query(sql_biometric, function (err, results) {
         if (err) throw err;
 
         for (let i = 0; i < results.length; i++) {
@@ -84,6 +96,8 @@ app.get('/api/patients/medical/information/:id', (req, res) => {
         record["medication"] = results;
         res.send(record);
     });
+
+
 
 });
 
@@ -292,9 +306,13 @@ app.put('/api/reception/patient', (req, res) => {
 
 
 //Retrieve Emergency Contact for a specific patient
+//http://localhost:3000/api/reception/patient/emergency_contact/69036544
 app.get('/api/reception/patient/emergency_contact/:id', (req, res) => {
-    let sql = `SELECT * FROM EMERGENCY_CONTACT WHERE healthcard_no = ${req.params.id} `;
-    toConnect(sql, res);
+    let sql = `SELECT * FROM EMERGENCY_CONTACT WHERE healthcard_no = ?`;
+    connection.query(sql, req.params.id, function (err, results) {
+        if (err) throw err;
+        res.send(results);
+    });
 });
 
 
