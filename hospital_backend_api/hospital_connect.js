@@ -209,6 +209,17 @@ app.post('/api/reception/patient', (req, res) => {
 });
 
 
+//Delete all patient information from database
+app.delete('/api/reception/patient/:id', (req, res) => {
+    let sql = `DELETE FROM patient WHERE healthcard_no = ${req.params.id}`;
+    connection.query(sql, function (err, result) {
+        if (err) throw err;
+        res.send("The Patient Information Has Been Deleted");
+    });
+
+
+});
+
 
 //Update a new patient 
 app.put('/api/reception/patient', (req, res) => {
