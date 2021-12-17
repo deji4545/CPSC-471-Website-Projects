@@ -17,24 +17,25 @@ function toConnect(sql, res) {
 }
 
 //Retrieve username and password
-app.get('/api/:username/:password', (req, res) => {
-    let sql = `SELECT * FROM LOGIN as L, STAFF as S WHERE L.staffid = ${req.params.username} 
-    and L.staffid = S.id_no`
+// app.get('/api/login/:username/:password', (req, res) => {
+//     let sql = `SELECT * FROM LOGIN as L, STAFF as S WHERE L.staffid = ${req.params.username} 
+//     and L.staffid = S.id_no`
 
-    let login_result = { "staff_type": 'unknown', "login_correct": false };
+//     let login_result = { "staff_type": 'unknown', "login_correct": false };
 
-    connection.query(sql, function (err, results) {
-        if (err) throw err;
-        if (results[0].staffid == req.params.username && results[0].password == req.params.password) {
-            login_result.login_correct = true;
-            login_result.staff_type = results[0].job;
+//     connection.query(sql, function (err, results) {
+//         if (err) throw err;
+//         if (results[0].staffid == req.params.username && results[0].password == req.params.password) {
+//             login_result.login_correct = true;
+//             login_result.staff_type = results[0].job;
 
-        }
-        res.send(login_result);
-    });
+//         }
+//         res.send(login_result);
+//     });
 
-    toConnect(sql, res);
-});
+//     toConnect(sql, res);
+// });
+
 //Retrieve All  Medical Information for a specific Patient
 app.get('/api/patients/medical/information/:id', (req, res) => {
 
@@ -43,8 +44,6 @@ app.get('/api/patients/medical/information/:id', (req, res) => {
 
 
     let biometeric = { "height": [], "bloodsugar": [], "bloodpressure_s": [], "bloodpressure_d": [], "date": [] }
-    //let record = { "biometric": {}, "illness": {} }
-
 
     connection.query(sql, function (err, results) {
         if (err) throw err;
@@ -56,7 +55,6 @@ app.get('/api/patients/medical/information/:id', (req, res) => {
             biometeric["bloodpressure_d"].push(results[i].bloodpressure_d)
             biometeric["date"].push(results[i].date)
         }
-        //record["biometric"] = biometeric;
         res.send(biometeric);
 
     });
@@ -90,7 +88,7 @@ app.get('/api/patients/medical/information/medication/:id', (req, res) => {
 
 });
 
-//Retrieve a patient medication
+//Insert patient medication
 app.post('/api/patients/medical/information/medication', (req, res) => {
     let medication = req.body;
     let sql = 'INSERT INTO medication SET ?';
@@ -102,7 +100,6 @@ app.post('/api/patients/medical/information/medication', (req, res) => {
 
 
 
-
 app.post('/api/patients/medical/information/illness', (req, res) => {
     let diagnose_with = req.body;
     let sql = 'INSERT INTO diagnose_with SET ?';
@@ -111,6 +108,7 @@ app.post('/api/patients/medical/information/illness', (req, res) => {
         res.send("A new diagnosis has been Added");
     });
 });
+
 
 
 
@@ -225,7 +223,6 @@ app.delete('/api/reception/patient/:id', (req, res) => {
         if (err) throw err;
         res.send("The Patient Information Has Been Deleted");
     });
-
 
 });
 
