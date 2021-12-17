@@ -126,6 +126,8 @@ app.get('/api/HR/staff/:id', (req, res) => {
     toConnect(sql, res);
 });
 
+
+
 //Insert a new staff for HR 
 app.post('/api/HR/staff', (req, res) => {
     let staff = req.body;
@@ -184,6 +186,19 @@ app.post('/api/HR/staff/dependents', (req, res) => {
         res.send("The New Dependent Has Been Added");
     });
 });
+
+
+//Delete Dependents
+app.delete('/api/HR/staff/dependents/:id_no/:fname/:lname', (req, res) => {
+    let sql = `DELETE FROM dependents WHERE id_no = ${req.params.id_no} and fname = '${req.params.fname}' and lname = '${req.params.lname}' `;
+    connection.query(sql, function (err, result) {
+        if (err) throw err;
+        res.send("The Depedents Has Been Deleted");
+    });
+
+});
+
+
 
 
 //PATIENT API
