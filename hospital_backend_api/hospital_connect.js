@@ -26,11 +26,12 @@ app.get('/api/login/:username/:password', (req, res) => {
     connection.query(sql, function (err, results) {
         if (err) throw err;
 
-        if (results[0].staffid == req.params.username && results[0].password == req.params.password) {
+        if (results.length > 0 && results[0].staffid == req.params.username && results[0].password == req.params.password) {
             login_result.login_correct = true;
             login_result.staff_type = results[0].job;
 
         }
+
         res.send(login_result);
     });
 
@@ -39,11 +40,17 @@ app.get('/api/login/:username/:password', (req, res) => {
 //Retrieve All  Medical Information for a specific Patient
 app.get('/api/patients/medical/information/:id', (req, res) => {
 
-    let sql = `SELECT * FROM BIOMETRIC as B WHERE B.h_no = ${req.params.id} `
-    //let sql2 = `SELECT name, date_diagnosed FROM DIAGNOSED_WITH WHERE healthcard_no = ${req.params.id}`
+    let sql = `SELECT * FROM BIOMETRIC as B WHERE B.h_no = ${req.params.id} `;
+    let sql_illness = `SELECT * FROM DIAGNOSED_WITH  WHERE healthcard_no = ${req.params.id} `;
+    let sql_medication = `SELECT drug_name, dose, frequency_per_day
+    FROM DIAGNOSED_WITH as D, MEDICATION as M WHERE D.healthcard_no = ${req.params.id}
+    and D.treat_no = M.t_no`;
 
 
+
+    let record = {}; //biometric and illness
     let biometeric = { "height": [], "bloodsugar": [], "bloodpressure_s": [], "bloodpressure_d": [], "date": [] }
+
 
     connection.query(sql, function (err, results) {
         if (err) throw err;
@@ -55,8 +62,27 @@ app.get('/api/patients/medical/information/:id', (req, res) => {
             biometeric["bloodpressure_d"].push(results[i].bloodpressure_d)
             biometeric["date"].push(results[i].date)
         }
-        res.send(biometeric);
+        record["biometric"] = biometeric;
+        //res.send(record);
 
+    });
+
+    connection.query(sql_illness, function (err, results) {
+        if (err) throw err;
+        record["illness"] = results;
+        //res.send(record);
+    });
+
+    connection.query(sql_illness, function (err, results) {
+        if (err) throw err;
+        record["illness"] = results;
+        //res.send(record);
+    });
+
+    connection.query(sql_medication, function (err, results) {
+        if (err) throw err;
+        record["medication"] = results;
+        res.send(record);
     });
 
 });
