@@ -20,8 +20,6 @@ function toConnect(sql, res) {
 //http://localhost:3000/api/login/81595444/GGcD7eGJQ
 app.get('/api/login/:username/:password', (req, res) => {
 
-
-
     let sql = `SELECT * FROM LOGIN as L, STAFF as S WHERE L.staffid = ?
     and L.staffid = S.id_no`
 
@@ -41,8 +39,8 @@ app.get('/api/login/:username/:password', (req, res) => {
 
 });
 
-//Retrieve All  Medical Information for a specific Patient
-
+//Retrieve all medical information for a specific patient
+// http://localhost:3000/api/patients/medical/information/58143759
 app.get('/api/patients/medical/information/:id', (req, res) => {
 
     let sql_biometric = `SELECT * FROM BIOMETRIC as B WHERE B.h_no = ? `;
@@ -50,6 +48,11 @@ app.get('/api/patients/medical/information/:id', (req, res) => {
     let sql_medication = `SELECT drug_name, dose, frequency_per_day
     FROM DIAGNOSED_WITH as D, MEDICATION as M WHERE D.healthcard_no = ?
     and D.treat_no = M.t_no`;
+
+    let sql_surgery = `SELECT S.date, S.type
+    FROM DIAGNOSED_WITH as D, Surgery as S WHERE D.healthcard_no = ?
+    and D.treat_no = S.t_no`;
+
     let sql_patient = `SELECT * FROM PATIENT WHERE healthcard_no = ? `
 
 
@@ -82,16 +85,17 @@ app.get('/api/patients/medical/information/:id', (req, res) => {
         record["illness"] = results;
     });
 
-    connection.query(sql_illness, req.params.id, function (err, results) {
-        if (err) throw err;
-        record["illness"] = results;
-
-    });
-
     connection.query(sql_medication, req.params.id, function (err, results) {
         if (err) throw err;
         record["medication"] = results;
+
+    });
+
+    connection.query(sql_surgery, req.params.id, function (err, results) {
+        if (err) throw err;
+        record["surgery"] = results;
         res.send(record);
+
     });
 
 
@@ -99,8 +103,8 @@ app.get('/api/patients/medical/information/:id', (req, res) => {
 });
 
 
-//Retrieve All Patients for a doctor 
-//http://localhost:3000/api/doctor/patient
+//Retrieve all patients for a doctor 
+// http://localhost:3000/api/doctor/patient
 app.get('/api/doctor/patient', (req, res) => {
     let sql = 'SELECT * FROM PATIENT'
     toConnect(sql, res);
@@ -108,6 +112,7 @@ app.get('/api/doctor/patient', (req, res) => {
 
 
 //Insert a patient biometric
+// 
 app.post('/api/patients/medical/information/biometric', (req, res) => {
     let biometric = req.body;
     let sql = 'INSERT INTO biometric SET ?';
@@ -119,6 +124,7 @@ app.post('/api/patients/medical/information/biometric', (req, res) => {
 
 
 //Insert a patient illness 
+
 app.post('/api/patients/medical/information/illness', (req, res) => {
     let diagnose_with = req.body;
     let sql = 'INSERT INTO diagnose_with SET ?';
@@ -142,17 +148,23 @@ app.post('/api/patients/medical/information/medication', (req, res) => {
 
 
 // HR API
+
 //Retrieve all the Staff Information For HR 
+//http://localhost:3000/api/HR/staff
 app.get('/api/HR/staff', (req, res) => {
     let sql = 'SELECT * FROM STAFF'
     toConnect(sql, res);
 });
 
 
-//Retrieve a single Staff Information For HR 
+//Retrieve a single Staff Information For HR
+//http://localhost:3000/api/HR/staff/514086348 
 app.get('/api/HR/staff/:id', (req, res) => {
-    let sql = `SELECT * FROM STAFF WHERE id_no = ${req.params.id}`
-    toConnect(sql, res);
+    let sql = `SELECT * FROM STAFF WHERE id_no = ?`
+    connection.query(sql, req.params.id, function (err, result) {
+        if (err) throw err;
+        res.send(result);
+    });
 });
 
 
@@ -168,6 +180,7 @@ app.post('/api/HR/staff', (req, res) => {
 });
 
 //Update Staff Information 
+//http://localhost:3000/api/HR/staff
 app.put('/api/HR/staff', (req, res) => {
     let staff = req.body;
     let sql = `UPDATE staff SET ? WHERE id_no = ${staff.id_no} `;
@@ -178,9 +191,10 @@ app.put('/api/HR/staff', (req, res) => {
 });
 
 //Delete HR staff
+//http://localhost:3000/api/HR/staff/2443
 app.delete('/api/HR/staff/:id', (req, res) => {
-    let sql = `DELETE FROM staff WHERE id_no = ${req.params.id}`;
-    connection.query(sql, function (err, result) {
+    let sql = `DELETE FROM staff WHERE id_no = ?`;
+    connection.query(sql, req.params.id, function (err, result) {
         if (err) throw err;
         res.send("The Staff Has Been Deleted");
     });
@@ -190,15 +204,16 @@ app.delete('/api/HR/staff/:id', (req, res) => {
 
 
 //Retrieve all the dependents for a specific staff
+//http://localhost:3000/api/HR/staff/dependents/153371888
 app.get('/api/HR/staff/dependents/:id', (req, res) => {
-    let sql = `SELECT * FROM STAFF WHERE id_no = ${req.params.id} `;
-    let sql2 = `SELECT * FROM DEPENDENTS WHERE id_no = ${req.params.id} `;
+    let sql = `SELECT * FROM STAFF WHERE id_no = ? `;
+    let sql2 = `SELECT * FROM DEPENDENTS WHERE id_no = ? `;
     let staff;
-    connection.query(sql, function (err, results) {
+    connection.query(sql, req.params.id, function (err, results) {
         staff = results[0];
     });
 
-    connection.query(sql2, function (err, results2) {
+    connection.query(sql2, req.params.id, function (err, results2) {
         staff["dependents"] = results2;
         if (err) throw err;
         res.send(staff);
@@ -218,6 +233,7 @@ app.post('/api/HR/staff/dependents', (req, res) => {
 
 
 //Delete Dependents
+//http://localhost:3000/api/HR/staff/dependents/580268862/Falkner/Neathway
 app.delete('/api/HR/staff/dependents/:id_no/:fname/:lname', (req, res) => {
     let sql = `DELETE FROM dependents WHERE id_no = ${req.params.id_no} and fname = '${req.params.fname}' and lname = '${req.params.lname}'`;
     connection.query(sql, function (err, result) {
@@ -233,6 +249,7 @@ app.delete('/api/HR/staff/dependents/:id_no/:fname/:lname', (req, res) => {
 //PATIENT API
 
 //Retrieve Patient Information For reception 
+//http://localhost:3000/api/reception/patient
 app.get('/api/reception/patient', (req, res) => {
     let sql = "SELECT P.healthcard_no, P.fname, P.m_initial, P.lname, P.gender, P.dob, P.address,\
     P.phone_number, P.insurance_provider, ward_name, E.fname as 'Efname',\
@@ -244,6 +261,7 @@ app.get('/api/reception/patient', (req, res) => {
 });
 
 //Retrieve specific Patient Information For reception 
+//http://localhost:3000/api/reception/patient/701940
 app.get('/api/reception/patient/:id', (req, res) => {
     let sql = `SELECT P.healthcard_no, P.fname, P.m_initial, P.lname, P.gender, P.dob, P.address,
     P.phone_number, P.insurance_provider, P.ward_no, E.fname as 'Efname',
@@ -261,6 +279,7 @@ app.get('/api/reception/patient/:id', (req, res) => {
 
 
 //Add new patient 
+//http://localhost:3000/api/reception/patient
 app.post('/api/reception/patient', (req, res) => {
     let patient = req.body;
     let sql = 'INSERT INTO patient SET ?';
