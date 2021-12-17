@@ -1,5 +1,7 @@
-//REFERENCE - Add Later
-
+/* REFERENCE - https://www.youtube.com/watch?v=pKd0Rpw7O48
+https://www.youtube.com/watch?v=EN6Dx22cPRI
+https://www.w3schools.com/nodejs/nodejs_mysql.asp
+*/
 const Joi = require('joi');
 const express = require('express');
 const app = express();
@@ -130,7 +132,8 @@ app.get('/api/HR/staff/:id', (req, res) => {
 
 
 
-//Insert a new staff for HR 
+//Insert a new staff for HR
+// http://localhost:3000/api/HR/staff
 app.post('/api/HR/staff', (req, res) => {
     let staff = req.body;
     let sql = 'INSERT INTO staff SET ?';
@@ -183,6 +186,7 @@ app.get('/api/HR/staff/dependents/:id', (req, res) => {
 
 
 //Insert a dependents
+//http://localhost:3000/api/HR/staff/dependents
 app.post('/api/HR/staff/dependents', (req, res) => {
     let dependents = req.body;
     let sql = 'INSERT INTO dependents SET ?';
@@ -253,6 +257,7 @@ app.post('/api/reception/patient', (req, res) => {
 
 
 //Delete all patient information from database
+// http://localhost:3000/api/reception/patient/1932
 app.delete('/api/reception/patient/:id', (req, res) => {
     let sql = `DELETE FROM patient WHERE healthcard_no = ${req.params.id}`;
     connection.query(sql, function (err, result) {
@@ -264,6 +269,7 @@ app.delete('/api/reception/patient/:id', (req, res) => {
 
 
 //Update a new patient 
+// http://localhost:3000/api/reception/patient
 app.put('/api/reception/patient', (req, res) => {
     let patient = req.body;
     let sql = `UPDATE patient SET ? WHERE healthcard_no = ${patient.healthcard_no} `;
@@ -287,6 +293,7 @@ app.get('/api/reception/patient/emergency_contact/:id', (req, res) => {
 
 
 //Insert Emergency Contact
+// http://localhost:3000/api/reception/emergency_contact
 app.post('/api/reception/emergency_contact', (req, res) => {
     let emergency_contact = req.body;
     let sql = 'INSERT INTO emergency_contact SET ?';
@@ -298,6 +305,7 @@ app.post('/api/reception/emergency_contact', (req, res) => {
 
 
 //Update a emergency contact 
+// http://localhost:3000/api/reception/emergency_contact
 app.put('/api/reception/emergency_contact', (req, res) => {
     let emergency_contact = req.body;
     let sql = `UPDATE emergency_contact SET ? WHERE healthcard_no = ${emergency_contact.healthcard_no} `;
@@ -306,11 +314,6 @@ app.put('/api/reception/emergency_contact', (req, res) => {
         res.send("Emergency Contact Update Succesfull");
     });
 });
-
-
-
-
-
 
 
 
