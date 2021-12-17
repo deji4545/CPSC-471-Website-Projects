@@ -100,6 +100,7 @@ app.get('/api/patients/medical/information/:id', (req, res) => {
 
 
 //Retrieve All Patients for a doctor 
+//http://localhost:3000/api/doctor/patient
 app.get('/api/doctor/patient', (req, res) => {
     let sql = 'SELECT * FROM PATIENT'
     toConnect(sql, res);
@@ -117,13 +118,6 @@ app.post('/api/patients/medical/information/biometric', (req, res) => {
 });
 
 
-//Retrieve a specific patient illness
-app.get('/api/patients/medical/information/illness/:id', (req, res) => {
-    let sql = `SELECT * FROM DIAGNOSED_WITH  WHERE healthcard_no = ${req.params.id} `
-    toConnect(sql, res);
-
-});
-
 //Insert a patient illness 
 app.post('/api/patients/medical/information/illness', (req, res) => {
     let diagnose_with = req.body;
@@ -134,15 +128,6 @@ app.post('/api/patients/medical/information/illness', (req, res) => {
     });
 });
 
-
-//Retrieve a patient medication plan 
-app.get('/api/patients/medical/information/medication/:id', (req, res) => {
-    let sql = `SELECT drug_name, dose, frequency_per_day
-    FROM DIAGNOSED_WITH as D, MEDICATION as M WHERE D.healthcard_no = ${req.params.id}
-    and D.treat_no = M.t_no`
-    toConnect(sql, res);
-
-});
 
 //Insert patient medication
 app.post('/api/patients/medical/information/medication', (req, res) => {
