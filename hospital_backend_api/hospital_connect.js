@@ -20,20 +20,13 @@ function toConnect(sql, res) {
 
 //Retrieve All  Medical Information for a specific Patient
 app.get('/api/patients/medical/information/:id', (req, res) => {
-    let weight; //array of weight
-    let height;
-    let temperature;
-    let bloodSugar;
-    let illness;
-    let medication;
-    let surgery;
 
     let sql = `SELECT * FROM BIOMETRIC as B WHERE B.h_no = ${req.params.id} `
-    let sql2 = `SELECT name, date_diagnosed FROM DIAGNOSED_WITH WHERE healthcard_no = ${req.params.id}`
+    //let sql2 = `SELECT name, date_diagnosed FROM DIAGNOSED_WITH WHERE healthcard_no = ${req.params.id}`
 
 
     let biometeric = { "height": [], "bloodsugar": [], "bloodpressure_s": [], "bloodpressure_d": [], "date": [] }
-    let record = { "biometric": {}, "illness": {} }
+    //let record = { "biometric": {}, "illness": {} }
 
 
     connection.query(sql, function (err, results) {
@@ -46,19 +39,20 @@ app.get('/api/patients/medical/information/:id', (req, res) => {
             biometeric["bloodpressure_d"].push(results[i].bloodpressure_d)
             biometeric["date"].push(results[i].date)
         }
-        record["biometric"] = biometeric;
+        //record["biometric"] = biometeric;
+        res.send(biometeric);
 
     });
 
-    connection.query(sql2, function (err, results) {
-        if (err) throw err;
-        record["illness"] = results;
-        res.send(record);
+});
 
-    });
+
+app.get('/api/patients/medical/information/illness/:id', (req, res) => {
 
 
 });
+
+
 
 
 
@@ -132,7 +126,6 @@ app.get('/api/reception/patient', (req, res) => {
     E.phone_number as 'E.phone_number'\
     FROM PATIENT as P, MEDICAL_WARD as M, EMERGENCY_CONTACT as E\
     WHERE P.ward_no = M.ward_no and P.healthcard_no = E.healthcard_no";
-
     toConnect(sql, res);
 });
 
@@ -159,7 +152,6 @@ app.put('/api/reception/patient', (req, res) => {
         res.send("Patient Update Succesful");
     });
 });
-
 
 
 
