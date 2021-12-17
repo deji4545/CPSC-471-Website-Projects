@@ -43,9 +43,11 @@ const Employee = () => {
                                         <tr>
                                             <td><b>Dependent</b></td>
                                             <td><b>Relationship</b></td>
+                                            <td><b>Phone number</b></td>
                                         </tr>
                                         <tr>
                                             <td>Martha</td>
+                                            <td>Mom</td>
                                             <td>Mom</td>
                                         </tr>
                                     </tbody>

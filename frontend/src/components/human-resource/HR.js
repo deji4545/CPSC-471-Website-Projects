@@ -2,7 +2,7 @@ import {useState,useEffect} from 'react'
 import HRItem from './HRItem'
 import Button from '../Button'
 import { Link } from "react-router-dom";
-import HREdit from './HREdit';
+// import HREdit from './HREdit';
 
 const HR = () => {
     const [employees, setEmployees] = useState([])
@@ -33,7 +33,7 @@ const HR = () => {
         .then(data => { setEmployees([])   
                     console.log(data)});
     }
-
+    
     const data = employees.filter(
         (val) => {
             const name = (val.fname+""+val.lname+""+val.m_initial).toString().toLowerCase()

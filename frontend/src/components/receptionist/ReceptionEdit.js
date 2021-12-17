@@ -77,7 +77,6 @@ const ReceptionEdit = () => {
     const [wardNo, setWard] = useState("")
     const [provider, setProvider] = useState("")
     const [message, setMessage] = useState("")
-    const [fill,setFill] =useState(false)
 
     
 
@@ -106,13 +105,13 @@ const ReceptionEdit = () => {
                 setePhone(patient.Ephone_number)
                 
             })
-           setFill(true)
+           
         }
        
-        if (fill===false && id !=='add'){
+        if ( id !=='add'){
             fetchPatient()
         }
-      }, [fill,id]);
+      }, [id]);
 
       
     
@@ -149,8 +148,6 @@ const ReceptionEdit = () => {
             <Route path="/reception" element={<Receptionist />} />
             <Route path="/" element={<Navigate replace to="/reception" />} />
         </Routes>)
-
-
     }
 
     return (

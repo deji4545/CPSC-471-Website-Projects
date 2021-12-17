@@ -3,6 +3,8 @@ import Button from '../Button'
 import {Link } from 'react-router-dom'
 const HRItem = ({employee, deleteEmployee}) => {
     const id = employee.id_no
+    
+
     return (
         <div className="item" style={{ fontSize: "12.5px" }}>
             <table >
