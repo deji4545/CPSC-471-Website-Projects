@@ -8,6 +8,7 @@ const ReceptionEdit = () => {
         if (healthCard === '' || fname === '' || lname === '' || mInit === '' || gender === '' || dob === '' || phone === '' || efname === '' || elname === '' ||
             emInit === '' || relation === '' || ephone === '' || address === '' || wardNo === '' || provider === '') {
             setMessage('No input can be empty')
+            return;
         }
 
         const patientOption = {
@@ -89,7 +90,7 @@ const ReceptionEdit = () => {
     if (message === 'added patient') {
         return (<Routes>
             <Route path="/reception" element={<Receptionist />} />
-            <Route path="/" element={<Navigate replace to="/receptionist" />} />
+            <Route path="/" element={<Navigate replace to="/reception" />} />
         </Routes>)
 
 
