@@ -119,6 +119,13 @@ app.get('/api/HR/staff', (req, res) => {
     toConnect(sql, res);
 });
 
+
+//Retrieve a single Staff Information For HR 
+app.get('/api/HR/staff/:id', (req, res) => {
+    let sql = `SELECT * FROM STAFF WHERE id_no = ${req.params.id}`
+    toConnect(sql, res);
+});
+
 //Insert a new staff for HR 
 app.post('/api/HR/staff', (req, res) => {
     let staff = req.body;
