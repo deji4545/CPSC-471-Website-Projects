@@ -2,11 +2,16 @@ import {useState,useEffect} from 'react'
 import HRItem from './HRItem'
 import Button from '../Button'
 import { Link } from "react-router-dom";
+import { Routes, Route, Navigate } from 'react-router-dom'
+
 // import HREdit from './HREdit';
 
 const HR = () => {
+   
     const [employees, setEmployees] = useState([])
     const [search, setSearch] = useState('')
+
+       
 
     const fetchEmployees = async () => {
         const res = await fetch('http://localhost:3000/api/HR/staff', { method: "GET" })
@@ -15,8 +20,16 @@ const HR = () => {
         return data
     }
 
+    const onLogout= ()=>{
+        sessionStorage.setItem('type',null)
+        window.location.reload();
+        console.log('under the water')
+    } 
+
     useEffect(() => {
-        
+        if (sessionStorage.getItem('type') !== 'human resource') {
+            return null
+        }
         const getPatients = async () => {
             const tasksFromServer = await fetchEmployees()
             //   console.log(tasksFromServer)
@@ -26,7 +39,14 @@ const HR = () => {
         getPatients()
         
     }, [])
-
+    if (sessionStorage.getItem('type') !== 'human resource') {
+        return (
+            <Routes>
+            <Route path="/" element={<Navigate replace to="/" />} />
+            {/* <Route path="*" element={<Navigate replace to="/" />} /> */}
+        </Routes>
+        )
+    } 
    
 
 
@@ -55,9 +75,11 @@ const HR = () => {
         <HRItem key={index} employee={employee} deleteEmployee={deleteEmployee} />))
 
 
-    return (
-        <div className="main-content">
+        
 
+    return (
+        <div className="main-content" style={{marginTop:"25px"}}>
+            <div><Button text="Logout" onClick={onLogout}/></div>
             <div className="search-box" >
                 Search: <input type="text" placeholder="Search..." value={search} onChange={(e) => setSearch(e.target.value)}/>
                 <div className="add-button"><Link to="/edit/hr/add"><Button text="Add Employee" /></Link></div>

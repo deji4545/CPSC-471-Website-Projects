@@ -61,7 +61,7 @@ const HREdit = () => {
         }
 
         setMessage('added employee')
-    
+
     }
 
     const [idNo, setID] = useState("")
@@ -136,8 +136,16 @@ const HREdit = () => {
     };
     const backButton = <div style={{ fontSize: "12.5px", display: "inline" }}>Cancel</div>
 
-    const deleteDependent=(dependentToDelete)=>{
+    const deleteDependent = (dependentToDelete) => {
         console.log(dependentToDelete)
+
+
+        fetch(`http://localhost:3000/api/HR/staff/dependents/${dependentToDelete.id_no}/${dependentToDelete.fname}/${dependentToDelete.lname}`, { method: "DELETE" })
+            .then(response => response)
+            .then(data => {
+                window.location.reload();
+                console.log(data)
+            });
     }
 
     if (message === 'added employee') {
@@ -158,13 +166,13 @@ const HREdit = () => {
                     <tbody>
                         <tr>
                             <td><b>ID:</b><br />
-                                
-                                    {id === "add" ?
-                                        <input type="text" style={{ width: "90%", height: "30px" }} placeholder="ID..."
+
+                                {id === "add" ?
+                                    <input type="text" style={{ width: "90%", height: "30px" }} placeholder="ID..."
                                         name="id" value={idNo} onChange={handleNumberChange} /> :
-                                        <input type="text" style={{ width: "90%", height: "30px" }} placeholder="ID..."
+                                    <input type="text" style={{ width: "90%", height: "30px" }} placeholder="ID..."
                                         name="id" value={idNo} onChange={handleNumberChange} readOnly />
-                                    }
+                                }
                             </td>
                             <td><b>SIN:</b><br />
                                 <input type="text" style={{ width: "90%", height: "30px" }} placeholder="SIN..."
@@ -224,7 +232,7 @@ const HREdit = () => {
                                                             <td>{dependent.fname + " " + dependent.m_initial + " " + dependent.lname}</td>
                                                             <td>{dependent.relationship}</td>
                                                             <td>{dependent.phone_number}</td>
-                                                            <td><Button text="Delete" onClick={()=>deleteDependent(dependent)} /></td>
+                                                            <td><Button text="Delete" onClick={() => deleteDependent(dependent)} /></td>
                                                         </tr>
                                                     )
                                                 }
