@@ -14,7 +14,7 @@ const ReceptionistItem = ({patient , deletePatient}) => {
                         <td><b>Healthcard #:</b><br /> {patient.healthcard_no} </td>
                         <td><b>Name:</b><br />{patient.fname +" "+ patient.m_initial+ " "+patient.lname}</td>
                         <td><b>Gender:</b><br />{patient.gender}</td>
-                        <td><b>DOB:</b><br />{patient.dob}</td>
+                        <td><b>DOB:</b><br />{patient.dob.substring(0,10)}</td>
                     </tr>
                     <tr>
                         <td style={{ columnSpan: "1" }}><b>Telephone #:</b><br />{patient.phone_number}</td>
@@ -27,9 +27,7 @@ const ReceptionistItem = ({patient , deletePatient}) => {
                     </tr>
                     <tr>
                         <td><b>Ward:</b><br /> {patient.ward_name} </td>
-                        <td><b>Insurance provider:</b><br />{patient.insurance_provider}</td>
-                        <td><b>Outstanding charge:</b><br />Data</td>
-                        
+                        <td><b>Insurance provider:</b><br />{patient.insurance_provider}</td>        
                     </tr>
                     <tr>
                         <td><Link to={{pathname:`/edit/reception/${id}`}}><Button text="Edit information" /></Link></td>
