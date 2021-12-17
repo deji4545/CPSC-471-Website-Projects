@@ -14,7 +14,7 @@ const ReceptionEdit = () => {
         }
         let method= 'POST'
         if(id==="add"){
-            method='POST'
+            // method='POST'
         } else{
             method='PUT'
         }
@@ -105,11 +105,13 @@ const ReceptionEdit = () => {
             })
            setFill(true)
         }
-        if (id !== 'add' && fill ===false) {
+       
+        if (fill===false && id !=='add'){
             fetchPatient()
         }
       }, [fill,id]);
 
+      
     
     const backButton = <div style={{ fontSize: "12.5px", display: "inline" }}>Cancel</div>
 
