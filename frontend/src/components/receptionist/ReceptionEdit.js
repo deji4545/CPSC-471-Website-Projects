@@ -13,7 +13,7 @@ const ReceptionEdit = () => {
             return;
         }
         let method= 'POST'
-        if(id==="add"){
+        if(id==='add'){
             // method='POST'
         } else{
             method='PUT'
@@ -40,21 +40,24 @@ const ReceptionEdit = () => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 healthcard_no: parseInt(healthCard),
-                fname: fname,
-                m_initial: mInit,
-                lname: lname,
+                fname: efname,
+                m_initial: emInit,
+                lname: elname,
                 relationship: relation,
-                phone_number: parseInt(phone)
+                phone_number: parseInt(ephone)
             })
         }
 
+        console.log(patientOption.method+ " "+emergencyOption.method)
+
         fetch('http://localhost:3000/api/reception/patient', patientOption)
             .then(response => response)
-            .then(data => { });
+            .then(data => { console.log(data)});
 
         fetch('http://localhost:3000/api/reception/emergency_contact', emergencyOption)
             .then(response => response)
-            .then(data => { setMessage('added patient') });
+            .then(data => { setMessage('added patient')   
+                    console.log(data)});
     }
     const [healthCard, setCard] = useState("")
     const [fname, setFname] = useState("")

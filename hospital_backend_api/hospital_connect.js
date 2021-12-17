@@ -198,7 +198,7 @@ app.get('/api/reception/patient', (req, res) => {
 //Retrieve specific Patient Information For reception 
 app.get('/api/reception/patient/:id', (req, res) => {
     let sql = `SELECT P.healthcard_no, P.fname, P.m_initial, P.lname, P.gender, P.dob, P.address,
-    P.phone_number, P.insurance_provider, ward_name, E.fname as 'Efname',
+    P.phone_number, P.insurance_provider, P.ward_no, E.fname as 'Efname',
     E.lname as 'Elname', E.m_initial as 'Em_initial', E.lname as 'Elname', E.relationship as 'Erelationship',
     E.phone_number as 'Ephone_number'
     FROM PATIENT as P, MEDICAL_WARD as M, EMERGENCY_CONTACT as E\
@@ -224,16 +224,16 @@ app.post('/api/reception/patient', (req, res) => {
 });
 
 
-//Delete all patient information from database
-app.delete('/api/reception/patient/:id', (req, res) => {
-    let sql = `DELETE FROM patient WHERE healthcard_no = ${req.params.id}`;
-    connection.query(sql, function (err, result) {
-        if (err) throw err;
-        res.send("The Patient Information Has Been Deleted");
-    });
+// //Delete all patient information from database
+// app.delete('/api/reception/patient/:id', (req, res) => {
+//     let sql = `DELETE FROM patient WHERE healthcard_no = ${req.params.id}`;
+//     connection.query(sql, function (err, result) {
+//         if (err) throw err;
+//         res.send("The Patient Information Has Been Deleted");
+//     });
 
 
-});
+// });
 
 
 //Update a new patient 

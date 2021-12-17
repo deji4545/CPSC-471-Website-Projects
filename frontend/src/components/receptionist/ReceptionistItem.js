@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const ReceptionistItem = ({patient , deletePatient}) => {
     const id =patient.healthcard_no
-    console.log(patient)
+    // console.log(patient)
     return (
 
         <div className="item" style={{ fontSize: "12.5px" }}>
