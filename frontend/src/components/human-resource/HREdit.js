@@ -100,7 +100,12 @@ const HREdit = () => {
             setAddress(data.address)
             setPostion(data.job)
             const salary=data.salary.toString()
-            setSalary(salary.substring(0,salary.indexOf('.')))
+            if(salary.includes('.')){
+                setSalary(salary.substring(0,salary.indexOf('.')))
+            }else {
+                setSalary(salary)
+            }
+            
             setDependent(data.dependents)
 
             return
